@@ -5,15 +5,19 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-import LandingPage from './components/landingpageView';
-import Login from './components/appStartView.js';
+import LandingPage from './components/LandingpageView';
+import AuthLandingPage from './components/AuthLandingPage.js';
+import GameOverview from "./components/GameOverviewView.js";
+import GameView from "./components/GameView";
 
 function App() {
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={<LandingPage />} />
-                <Route path="/login" element={<LandingPage />} />
+                <Route path="/start" element={<AuthLandingPage />} />
+                <Route path="/gameoverview" element={<GameOverview />} />
+                <Route path="/gameview" element={<GameView />} />
             </Routes>
         </Router>
     );

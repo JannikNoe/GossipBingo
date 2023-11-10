@@ -1,5 +1,6 @@
 import React from 'react';
-import PublicHeader from "./publicHeaderView";
+import PublicHeader from "./PublicHeaderView";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     return (
@@ -14,16 +15,18 @@ const LandingPage = () => {
                                 <div className="absolute bottom-0">
                                     <p className="text-white leading-loose w-[64%]">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
                                     <div className="mt-4">
-                                        <button
-                                            className="uppercase w-[64%] rounded-xl bg-white px-3 py-3 text-md font-semibold text-DarkGrayPrimary shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition">
-                                            Jetzt mitmachen 🎉
-                                        </button>
+                                        <Link to="/start">
+                                            <button
+                                                className="uppercase w-[64%] rounded-xl bg-white px-3 py-3 text-md font-semibold text-DarkGrayPrimary shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition">
+                                                Jetzt mitmachen 🎉
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-span-1 bg-white w-full rounded-[40px] h-[80%] relative">
                                 <div className="w-full">
-                                    <img src="/client/public/images/gossipBingoMockup.png" alt="" className="w-full"/>
+                                    <img src="client/src/images/gossipBingoMockup.png" alt="" className="w-full"/>
                                 </div>
                             </div>
                         </div>

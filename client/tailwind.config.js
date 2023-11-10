@@ -7,13 +7,14 @@ module.exports = {
         DarkGrayPrimary: '#262525',
         GamePrimary:'#EB7A51',
         GrayPrimary:'#F7F5F5',
-        YellowPrimary:'#FFFF00',
+        YellowPrimary:'#F9F361',
 
       },
       backgroundColor:{
         bgDarkGrayPrimary: '#262525',
         bgGamePrimary:'#EB7A51',
-        BgGrayPrimary:'#F7F5F5',
+        bgGrayPrimary:'#F7F5F5',
+        bgYellowPrimary:'#F9F361',
       }
     },
   },
