@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import GameHeader from "./GameHeaderView";
 
@@ -9,111 +9,106 @@ const requirementList = [
 ];
 
 const GameView = () => {
+    const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
+
+    const [isPastGossipExpanded, setIsPastGossipExpanded] = useState(false);
+    const tooglePastGossipDetails = () => {
+        setIsPastGossipExpanded(!isPastGossipExpanded);
+    }
+
+
     return (
-        <div className="bg-bgGamePrimary">
+        <div className="bg-bgGamePrimary h-screen">
             <GameHeader />
             <div className="max-w-xl m-auto px-6 pb-14">
-                <div className="bg-white rounded-3xl relative p-5 mt-8">
-                    <h3 className="uppercase text-2xl font-semibold">Spiel Beitreten</h3>
-                    {requirementList.map(requirement => (
-                        <div key={requirement.id} className="flex gap-x-2 mt-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
-                                <g id="Gruppe_64" data-name="Gruppe 64" transform="translate(-40 -162)">
-                                    <circle id="Ellipse_2" data-name="Ellipse 2" cx="11" cy="11" r="11" transform="translate(40 162)"/>
-                                    <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-107.495 -170.245)" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
-                                </g>
-                            </svg>
-                            <span>{requirement.text}</span>
+                <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
+                    <h3 className="uppercase text-4xl font-semibold">Gossip Bingo</h3>
+                    <span class="text-sm block pt-1.5">Ilmenaugarten Edition</span>
+                    <div className="grid grid-cols-2 text-center mt-8 gap-x-2">
+                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
+                            <h6 className="uppercase font-normal text-sm pb-0.5">Gossip</h6>
+                            <h4 className="uppercase font-medium text-xl">Tracker</h4>
                         </div>
-                    ))}
-                    <div className="mt-8">
-                        <Link to="">
-                            <button
-                                className="uppercase w-full rounded-2xl bg-bgDarkGrayPrimary px-3 py-3 text-md font-semibold text-white shadow-sm">
-                                Start
-                            </button>
-                        </Link>
+                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
+                            <h6 className="uppercase font-normal text-sm pb-0.5">Bingofeld</h6>
+                            <h4 className="uppercase font-medium text-xl">öffnen</h4>
+                        </div>
                     </div>
-                    <div className="absolute top-4 right-5">
-                        <Link to="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24">
-                                <g id="Gruppe_65" data-name="Gruppe 65" transform="translate(-334 -107)">
-                                    <circle id="Ellipse_11" data-name="Ellipse 11" cx="11" cy="11" r="11" transform="translate(334 108)"/>
-                                    <text id="_" data-name="?" transform="translate(341 125)" fill="#fff" font-size="17" font-family="Poppins-Medium, Poppins" font-weight="500"><tspan x="0" y="0">?</tspan></text>
-                                </g>
-                            </svg>
-                        </Link>
+
+                    <div className=" mt-3">
+                        <div className="flex justify-center mb-6 bg-bgDarkGrayPrimary rounded-full p-1 relative">
+                            <div
+                                className={`px-4 py-2 rounded-full uppercase text-sm text-center ${activeTab === 'openRequests' ? 'bg-bgGrayPrimary text-bgGrayPrimary' : 'bg-bgDarkGrayPrimary text-white'}`}
+                                onClick={() => setActiveTab('openRequests')}>
+                                <span>Offene Anfragen</span>
+                                <div className="w-[18px] h-[18px] bg-bgDarkGrayPrimary text-white rounded-full absolute flex justify-center items-center top-[30%] left-[38%]">
+                                    <span className="text-[10px]">4</span>
+                                </div>
+                            </div>
+                            <div
+                                className={`px-4 py-2 rounded-full uppercase text-sm text-center ${activeTab === 'pastGossip' ? 'bg-bgGrayPrimary text-DarkGrayPrimary' : 'bg-bgDarkGrayPrimary text-white'}`}
+                                onClick={() => setActiveTab('pastGossip')}
+                            >
+                                Geschehener Gossip
+                            </div>
+                        </div>
+
+                        <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
+                            {activeTab === 'openRequests' &&
+                                <div>
+                                    <div className="flex gap-x-3 bg-white py-3 px-5 rounded-full items-center">
+                                        <span className="font-semibold text-lg">12</span>
+                                        <p className="text-sm line-clamp-2">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
+                                    </div>
+                                    <p className="text-xs text-center opacity-70">Aktuell gibt es keinen Gossip zum abhaken... <br />Verbreite etwas Gossip, damit es spannender wird 😉</p>
+                                </div>}
+                        </div>
+                        <div
+                            className={`transition-all duration-500 ${activeTab === 'pastGossip' ? 'opacity-100' : 'opacity-0'}`}
+                        >
+                            {activeTab === 'pastGossip' &&
+                                <div onClick={tooglePastGossipDetails}>
+                                    {!isPastGossipExpanded ? (
+                                        <div className="flex gap-x-3 bg-white py-3 px-5 rounded-full items-center relative">
+                                        <span className="absolute bg-black rounded-full py-1 px-3 right-5 -top-4">
+                                            <p className="text-white text-[11px]">19.11.23 - 03:03 Uhr</p>
+                                        </span>
+                                        <svg className="w-[40px] h-[40px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <g id="Gruppe_44" data-name="Gruppe 44" transform="translate(-52 -449)">
+                                                <circle id="Ellipse_22" data-name="Ellipse 22" cx="11" cy="11" r="11" transform="translate(52 449)"/>
+                                                <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-95.495 116.755)" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
+                                            </g>
+                                        </svg>
+                                        <p className="text-sm line-clamp-2">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
+                                    </div>
+                                    ) : (
+                                        <div className="bg-white py-3 px-5 rounded-3xl ">
+                                            <div className="flex gap-x-3 items-center relative mt-2">
+                                                <svg className="w-[20px] h-[20px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                                    <g id="Gruppe_44" data-name="Gruppe 44" transform="translate(-52 -449)">
+                                                        <circle id="Ellipse_22" data-name="Ellipse 22" cx="11" cy="11" r="11" transform="translate(52 449)"/>
+                                                        <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-95.495 116.755)" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
+                                                    </g>
+                                                </svg>
+                                                <div className="bg-black rounded-full py-1 px-3">
+                                                    <p className="text-white text-[11px]">19.11.23 - 03:03 Uhr</p>
+                                                </div>
+                                            </div>
+                                            <p className="text-sm pt-4">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
+                                            <h6 className="text-sm pt-2">Bestätigt von</h6>
+                                            <div className="">
+                                                {/*Profilbilder einblenden*/}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                </div>}
+                        </div>
+
                     </div>
+
                 </div>
 
-                <div className="mt-10">
-                    <h3 className="uppercase text-2xl font-semibold text-white">Weitere Möglichkeiten</h3>
-                    <Link to="">
-                        <div className="bg-bgYellowPrimary rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
-                                <div className="">
-                                    <h6 className="uppercase text-sm pb-1.5">Dein eigenes</h6>
-                                    <h4 className="uppercase text-3xl font-medium">Profil</h4>
-                                </div>
-                                <div className="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.728" height="27.275" viewBox="0 0 18.728 27.275">
-                                        <g id="Gruppe_2" data-name="Gruppe 2" transform="translate(-329.749 -449.501)">
-                                            <line id="Linie_3" data-name="Linie 3" x2="17.226" y2="12.947" transform="translate(330.5 450.5)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                            <line id="Linie_4" data-name="Linie 4" x2="12.947" y2="17.226" transform="translate(347.726 462.83) rotate(90)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to="">
-                        <div className="bg-[#8F60F8] rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
-                                <div className="">
-                                    <h6 className="uppercase text-sm pb-1.5 text-white">Wo sind die</h6>
-                                    <h4 className="uppercase text-3xl font-medium text-white">Einstellungen</h4>
-                                </div>
-                                <div className="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.728" height="27.275" viewBox="0 0 18.728 27.275">
-                                        <g id="Gruppe_2" data-name="Gruppe 2" transform="translate(-329.749 -449.501)">
-                                            <line id="Linie_3" data-name="Linie 3" x2="17.226" y2="12.947" transform="translate(330.5 450.5)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                            <line id="Linie_4" data-name="Linie 4" x2="12.947" y2="17.226" transform="translate(347.726 462.83) rotate(90)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to="">
-                        <div className="bg-[#F87676] rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
-                                <div className="">
-                                    <h6 className="uppercase text-sm pb-1.5 text-white">Admins haben ein</h6>
-                                    <h4 className="uppercase text-3xl font-medium text-white">Dashboard</h4>
-                                </div>
-                                <div className="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.728" height="27.275" viewBox="0 0 18.728 27.275">
-                                        <g id="Gruppe_2" data-name="Gruppe 2" transform="translate(-329.749 -449.501)">
-                                            <line id="Linie_3" data-name="Linie 3" x2="17.226" y2="12.947" transform="translate(330.5 450.5)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                            <line id="Linie_4" data-name="Linie 4" x2="12.947" y2="17.226" transform="translate(347.726 462.83) rotate(90)" fill="none" stroke="#000" stroke-width="2.5"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                <div className="mt-10">
-                    <span class="block text-center text-white uppercase pb-4">Wie gefällt die Gossip Bingo?</span>
-                    <Link to="">
-                        <button
-                            className="uppercase w-full rounded-2xl bg-white px-3 py-3 text-md font-semibold text-DarkGrayPrimary shadow-sm">
-                            Feedback geben
-                        </button>
-                    </Link>
-                </div>
             </div>
         </div>
     );
