@@ -25,10 +25,11 @@ const PublicHeader = () => {
                     </div>
                 </div>
             </div>
-            <div className="block md:hidden relative pt-20">
-                <div className="absolute top-6 z-10 flex items-center justify-between gap-x-3 w-full px-6">
+            <div className="block md:hidden relative pt-20 pb-4">
+                <div className="absolute top-6 z-10 flex items-center justify-between gap-x-3 w-full">
                     <div className="">
-                        <h2 className="text-white font-semibold text-2xl">Gossip Bingo <span className="text-sm font-normal">v.1.0.0</span></h2>
+                        <h2 className="text-white font-semibold text-xl">Gossip Bingo</h2>
+                        <span className="text-white text-sm font-normal block -mt-0.5">v.1.0.0</span>
                     </div>
                     <div className="flex items-center gap-x-2">
                         <div className="">

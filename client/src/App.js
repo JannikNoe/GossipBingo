@@ -8,13 +8,17 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import LandingPage from './components/LandingpageView';
 import AuthLandingPage from './components/AuthLandingPage.js';
 import GameOverview from "./components/GameOverviewView.js";
-import GameView from "./components/GameView";
+import GameView from "./components/GameView.js";
+import LoginView from "./components/LoginView.js";
+import RegisterView from "./components/RegisterView.js";
 
 function App() {
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginView />} />
+                <Route path="/register" element={<RegisterView />} />
                 <Route path="/start" element={<AuthLandingPage />} />
                 <Route path="/gameoverview" element={<GameOverview />} />
                 <Route path="/gameview" element={<GameView />} />
