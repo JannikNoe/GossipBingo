@@ -12,4 +12,9 @@ class GameSession extends Model
     protected $fillable = [
         'status',
     ];
+    public function setGameStatus()
+    {
+        $this->status = 1;
+        $this->save();
+    }
 }
