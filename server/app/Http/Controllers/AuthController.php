@@ -26,7 +26,7 @@ class AuthController extends Controller
                 'username' => $username,
                 'profileImage' => $profileImage
 
-            ], 200);
+            ], 201);
 
         }
 
