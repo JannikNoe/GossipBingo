@@ -28,7 +28,7 @@ const GameView = () => {
             <div className="max-w-xl m-auto px-6 pb-14">
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     <h3 className="uppercase text-4xl font-semibold">Gossip Bingo</h3>
-                    <span class="text-sm block pt-1.5">Ilmenaugarten Edition</span>
+                    <span className="text-sm block pt-1.5">Ilmenaugarten Edition</span>
                     <div className="grid grid-cols-2 text-center mt-8 gap-x-2">
                         <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
                             <h6 className="uppercase font-normal text-sm pb-0.5">Gossip</h6>
