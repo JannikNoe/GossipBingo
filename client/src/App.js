@@ -11,6 +11,7 @@ import GameOverview from "./components/GameOverviewView.js";
 import GameView from "./components/GameView.js";
 import LoginView from "./components/LoginView.js";
 import RegisterView from "./components/RegisterView.js";
+import BingoGridView from "./components/bingoGridView.js";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/start" element={<AuthLandingPage />} />
                 <Route path="/gameoverview" element={<GameOverview />} />
                 <Route path="/gameview" element={<GameView />} />
+                <Route path="/gamegrid" element={<BingoGridView />} />
             </Routes>
         </Router>
     );
