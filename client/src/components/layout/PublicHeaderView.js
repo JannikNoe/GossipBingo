@@ -19,7 +19,7 @@ const PublicHeader = () => {
                         <span>|</span>
                         <Link to="impressum" className="">Impressum</Link>
                         <span className="opacity-0">|</span>
-                        <a href="https://20north.de/privacy-policy/" target="_blank" className="">Datenschmutz</a>
+                        <a href="client/src/components/layout/PublicHeaderView" target="_blank" className="">Datenschmutz</a>
                         <span>|</span>
                         <Link to="" className="">Log In</Link>
                     </div>

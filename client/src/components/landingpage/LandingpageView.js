@@ -1,5 +1,5 @@
 import React from 'react';
-import PublicHeader from "./PublicHeaderView";
+import PublicHeader from "../layout/PublicHeaderView";
 import {Link} from "react-router-dom";
 
 const LandingPage = () => {

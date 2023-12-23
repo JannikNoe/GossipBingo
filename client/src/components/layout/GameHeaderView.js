@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const GameHeader = () => {
 
@@ -9,12 +9,18 @@ const GameHeader = () => {
         setMobileNavOpen(!mobileNavOpen);
     };
 
+    const navigate = useNavigate();
+
+    const handleBackButtonClick = () => {
+        navigate(-1);
+    };
+
     return (
         <header>
 
             <div className="block md:hidden relative pt-20 z-[99]">
                 <div className="absolute top-6 z-10 flex items-center justify-between w-full px-6 ">
-                    <div className="bg-white rounded-full p-2.5">
+                    <div onClick={handleBackButtonClick} className="bg-white rounded-full p-2.5">
                         <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.173 15.83">
                             <path id="arrow-left-long" d="M.286,102.9a1.139,1.139,0,0,0,0,1.615L6.766,111a1.142,1.142,0,1,0,1.615-1.615l-4.526-4.526H18.229c.634,0,1.394-.469,1.394-1.1a1.419,1.419,0,0,0-1.394-1.189H3.855l4.526-4.527a1.142,1.142,0,0,0-1.615-1.615Z" transform="translate(0.3 -95.753)" stroke="#000" stroke-width="0.5"/>
                         </svg>

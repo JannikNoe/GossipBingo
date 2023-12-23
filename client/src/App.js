@@ -5,13 +5,13 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-import LandingPage from './components/LandingpageView';
-import AuthLandingPage from './components/AuthLandingPage.js';
-import GameOverview from "./components/GameOverviewView.js";
-import GameView from "./components/GameView.js";
-import LoginView from "./components/LoginView.js";
-import RegisterView from "./components/RegisterView.js";
-import BingoGridView from "./components/bingoGridView.js";
+import LandingPage from './components/landingpage/LandingpageView';
+import AuthLandingPage from './components/features/auth/AuthLandingPage.js';
+import GameOverview from "./components/features/game/GameOverviewView.js";
+import GameView from "./components/features/game/GameView.js";
+import LoginView from "./components/features/auth/LoginView.js";
+import RegisterView from "./components/features/auth/RegisterView.js";
+import BingoGridView from "./components/features/game/bingoGridView.js";
 
 function App() {
     return (
