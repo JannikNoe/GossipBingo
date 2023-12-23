@@ -80,16 +80,34 @@ const GameView = () => {
                                     </div>
                                 </div>
                                 <div className="">
-                                    <div
-                                        className={`accordion-content ${activeTab === 'openRequests' ? 'open' : ''}`}>
-                                        <UncheckedScenariosAccordion />
-                                    </div>
+                                    {/* Bedingtes Rendering basierend auf dem Wert von activeTab */}
+                                    {activeTab === 'openRequests' && (
+                                        <div
+                                            className="transition-all duration-500 opacity-100">
+                                            <UncheckedScenariosAccordion />
+                                        </div>
+                                    )}
 
-                                    <div
-                                        className={`accordion-content ${activeTab === 'pastGossip' ? 'open' : ''}`}>
-                                        <CheckedScenariosAccordion />
-                                    </div>
+                                    {activeTab === 'pastGossip' && (
+                                        <div
+                                            className="transition-all duration-500 opacity-100">
+                                            <CheckedScenariosAccordion />
+                                        </div>
+                                    )}
                                 </div>
+
+                                {/*<div*/}
+                                {/*    className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}*/}
+                                {/*>*/}
+                                {/*    <UncheckedScenariosAccordion></UncheckedScenariosAccordion>*/}
+                                {/*</div>*/}
+
+
+                                {/*<div*/}
+                                {/*    className={`transition-all duration-500 ${activeTab === 'pastGossip' ? 'opacity-100' : 'opacity-0'}`}*/}
+                                {/*>*/}
+                                {/*    <CheckedScenariosAccordion></CheckedScenariosAccordion>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     ):(
