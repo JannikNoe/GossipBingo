@@ -16,3 +16,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.accordion-content {
+  transition: max-height 500ms ease-in-out, opacity 500ms ease-in-out;
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordion-content.open {
+  max-height: 100%;
+  opacity: 1;
+}

@@ -2,12 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import GameHeader from "../../layout/GameHeaderView";
 import WaitingGif from '../../../images/gifs/giphy-waiting.gif';
+import UncheckedScenariosAccordion from "./gameComponents/UncheckedScenariosAccordionView";
+import CheckedScenariosAccordion from "./gameComponents/CheckedScenariosAccordionView";
 
-const requirementList = [
-    { id: 1, text: 'Alkohol steht bereit' },
-    { id: 2, text: 'Geile Menschen sind am Start' },
-    { id: 3, text: 'Bereit für einen geilen Abend' },
-];
+
 
 const checkIfGameStarted = async () => {
     // Code, um den Status vom Server oder der Datenbank zu holen
@@ -29,7 +27,6 @@ const GameView = () => {
     });
 
     const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
-
     const [isPastGossipExpanded, setIsPastGossipExpanded] = useState(false);
     const togglePastGossipDetails = () => {
         setIsPastGossipExpanded(!isPastGossipExpanded);
@@ -41,12 +38,8 @@ const GameView = () => {
     }
 
 
-
-
-
-
     return (
-        <div className="bg-bgGamePrimary h-screen">
+        <div className="bg-bgGamePrimary h-[100%]">
             <GameHeader />
             <div className="">
             </div>
@@ -86,53 +79,15 @@ const GameView = () => {
                                         Geschehener Gossip
                                     </div>
                                 </div>
+                                <div className="">
+                                    <div
+                                        className={`accordion-content ${activeTab === 'openRequests' ? 'open' : ''}`}>
+                                        <UncheckedScenariosAccordion />
+                                    </div>
 
-                                <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
-                                    {activeTab === 'openRequests' &&
-                                        <div onClick={toggleOpenRequests}>
-                                            {!isOpenRequests ? (
-                                                <>
-                                                    <div className="flex gap-x-3 bg-white py-3 px-5 rounded-full items-center">
-                                                        <span className="font-semibold text-lg">12</span>
-                                                        <p className="text-sm line-clamp-2">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
-                                                    </div>
-                                                    <p className="text-xs text-center opacity-70">Aktuell gibt es keinen Gossip zum abhaken... <br />Verbreite etwas Gossip, damit es spannender wird 😉</p>
-                                                </>
-                                            ) : (
-                                                <div className="">
-                                                    <div className="flex gap-x-3 bg-white py-3 px-5 rounded-full items-center">
-                                                        <span className="font-semibold text-lg">12</span>
-                                                        <p className="text-sm line-clamp-2">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    }
-                                </div>
-                                <div
-                                    className={`transition-all duration-500 ${activeTab === 'pastGossip' ? 'opacity-100' : 'opacity-0'}`}
-                                >
-                                    {/*// Geschehener Gossip Textabschnitt*/}
-                                    <div className="bg-white py-3 px-5 rounded-3xl ">
-                                        <div className="flex gap-x-3 items-center relative mt-2">
-                                            <svg className="w-[20px] h-[20px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
-                                                <g id="Gruppe_44" data-name="Gruppe 44" transform="translate(-52 -449)">
-                                                    <circle id="Ellipse_22" data-name="Ellipse 22" cx="11" cy="11" r="11" transform="translate(52 449)"/>
-                                                    <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-95.495 116.755)" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
-                                                </g>
-                                            </svg>
-                                            <div className="bg-black rounded-full py-1 px-3">
-                                                <p className="text-white text-[11px]">19.11.23 - 03:03 Uhr</p>
-                                            </div>
-                                        </div>
-                                        <p className="text-sm pt-4">Jannik wirf ein Teil und möchte kuscheln kuscheln kuscheln kuscheln</p>
-                                        <h6 className="text-sm pt-2">Bestätigt von</h6>
-                                        <div className="flex mt-1">
-                                            <img src="client/src/components/features/game/GameView" alt="" className="bg-black w-[30px] h-[30px] rounded-full border-white border-1" />
-                                            <div className="bg-black w-[30px] h-[30px] rounded-full border-white border-1 text-white text-xs font-semibold flex justify-center items-center">
-                                                <span className="block ">+4</span>
-                                            </div>
-                                        </div>
+                                    <div
+                                        className={`accordion-content ${activeTab === 'pastGossip' ? 'open' : ''}`}>
+                                        <CheckedScenariosAccordion />
                                     </div>
                                 </div>
                             </div>
