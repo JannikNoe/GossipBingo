@@ -11,7 +11,11 @@ import GameOverview from "./components/features/game/GameOverviewView.js";
 import GameView from "./components/features/game/GameView.js";
 import LoginView from "./components/features/auth/LoginView.js";
 import RegisterView from "./components/features/auth/RegisterView.js";
-import BingoGridView from "./components/features/game/bingoGridView.js";
+import BingoGridView from "./components/features/game/gameComponents/bingoGridView.js";
+import GossipTrackerView from "./components/features/game/gameComponents/GossipTrackerView";
+import DashboardView from "./components/features/game/dashboard/dashboardView.js";
+import UserManagementView from "./components/features/game/dashboard/UserManagementView.js";
+import SettingsView from "./components/features/settingsView";
 
 import { ModalProvider, ModalContext } from './context/ModalContext';
 import ModalWrapper from "./components/layout/ModalWrapper";
@@ -27,9 +31,16 @@ function App() {
                     <Route path="/login" element={<LoginView />} />
                     <Route path="/register" element={<RegisterView />} />
                     <Route path="/start" element={<AuthLandingPage />} />
+
                     <Route path="/gameoverview" element={<GameOverview />} />
                     <Route path="/gameview" element={<GameView />} />
                     <Route path="/gamegrid" element={<BingoGridView />} />
+                    <Route path="/gossiptracker" element={<GossipTrackerView />} />
+
+                    <Route path="/settings" element={<SettingsView />} />
+
+                    <Route path="/dashboard" element={<DashboardView />} />
+                    <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
                 </Routes>
             </Router>
         </ModalProvider>

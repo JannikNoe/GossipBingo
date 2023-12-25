@@ -43,7 +43,7 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="mt-4">
-                            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-center">
+                            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 text-center">
                                 Passwort
                             </label>
                             <div className="mt-1">
@@ -57,7 +57,7 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="mt-4">
-                            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-center">
+                            <label htmlFor="passwordRepear" className="block text-sm font-medium leading-6 text-gray-900 text-center">
                                 Passwort Wiederholen
                             </label>
                             <div className="mt-1">
@@ -86,7 +86,7 @@ const Register = () => {
                                 className=" uppercase w-3/5 rounded-xl px-3 py-3 text-sm font-semibold bg-bgDarkGrayPrimary text-white shadow-sm">
                                 Registrieren 🎉
                             </button>
-                            <Link for="">
+                            <Link to="/login">
                                 <button
                                     className="mt-2 uppercase w-3/5 rounded-xl px-3 py-3 text-sm font-semibold text-DarkGrayPrimary">
                                     Einloggen

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import GameHeader from "../../layout/GameHeaderView";
+import GameHeader from "../../../layout/GameHeaderView";
 
 
 

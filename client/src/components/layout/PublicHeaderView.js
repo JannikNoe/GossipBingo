@@ -33,10 +33,12 @@ const PublicHeader = () => {
                     </div>
                     <div className="flex items-center gap-x-2">
                         <div className="">
-                            <button
-                                className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-DarkGrayPrimary">
-                                Log In
-                            </button>
+                            <Link to="/login">
+                                <button
+                                    className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-DarkGrayPrimary">
+                                    Log In
+                                </button>
+                            </Link>
                         </div>
                         <div className="bg-white rounded-full  p-2.5 " onClick={toggleMobileNav}>
                             <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.132 14.742">
@@ -66,12 +68,12 @@ const PublicHeader = () => {
                         <div className="ml-8 mt-4">
                             <hr className="h-[10px] w-4/5 color-black" />
                             <div className="flex gap-x-2 opacity-50">
-                                <Link to="/" className="relative group">
+                                <Link to="/impressum" className="relative group">
                                     <span className="relative z-[99] font-normal text-sm">Impressum</span>
                                 </Link>
                                 <span>|</span>
                                 <Link to="/" className="relative group">
-                                    <span className="relative z-[99] font-normal text-sm">Datenschutz</span>
+                                    <span className="relative z-[99] font-normal text-sm">Datenschmutz</span>
                                 </Link>
                             </div>
                         </div>

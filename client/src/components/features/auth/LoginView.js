@@ -50,7 +50,7 @@ const Login = () => {
                                 className=" uppercase w-3/5 rounded-xl px-3 py-3 text-sm font-semibold bg-bgDarkGrayPrimary text-white shadow-sm">
                                 Einloggen 🎉
                             </button>
-                            <Link for="">
+                            <Link to="/register">
                                 <button
                                     className="mt-2 uppercase w-3/5 rounded-xl px-3 py-3 text-sm font-semibold text-DarkGrayPrimary">
                                     Registrieren

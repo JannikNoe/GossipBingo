@@ -67,7 +67,7 @@ const GameOverview = () => {
                         </div>
                     </Link>
 
-                    <Link to="">
+                    <Link to="/settings">
                         <div className="bg-[#8F60F8] rounded-3xl py-6 px-6 mt-4">
                             <div className="flex justify-between items-center">
                                 <div className="">
@@ -86,7 +86,7 @@ const GameOverview = () => {
                         </div>
                     </Link>
 
-                    <Link to="">
+                    <Link to="/dashboard">
                         <div className="bg-[#F87676] rounded-3xl py-6 px-6 mt-4">
                             <div className="flex justify-between items-center">
                                 <div className="">
@@ -106,7 +106,7 @@ const GameOverview = () => {
                     </Link>
                 </div>
                 <div className="mt-10">
-                    <span class="block text-center text-white uppercase pb-4">Wie gefällt die Gossip Bingo?</span>
+                    <span className="block text-center text-white uppercase pb-4">Wie gefällt die Gossip Bingo?</span>
                     <Link to="">
                     <button
                         className="uppercase w-full rounded-2xl bg-white px-3 py-3 text-md font-semibold text-DarkGrayPrimary shadow-sm">

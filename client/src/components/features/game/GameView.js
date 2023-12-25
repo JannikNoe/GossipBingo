@@ -39,7 +39,7 @@ const GameView = () => {
 
 
     return (
-        <div className="bg-bgGamePrimary h-[100%]">
+        <div className="bg-bgGamePrimary h-full">
             <GameHeader />
             <div className="">
             </div>
@@ -50,10 +50,12 @@ const GameView = () => {
                     {gameStarted ? (
                         <div className="">
                             <div className="grid grid-cols-2 text-center mt-8 gap-x-2">
-                                <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
-                                    <h6 className="uppercase font-normal text-sm pb-0.5">Gossip</h6>
-                                    <h4 className="uppercase font-medium text-xl">Tracker</h4>
-                                </div>
+                                <Link to="/gossiptracker">
+                                    <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
+                                        <h6 className="uppercase font-normal text-sm pb-0.5">Gossip</h6>
+                                        <h4 className="uppercase font-medium text-xl">Tracker</h4>
+                                    </div>
+                                </Link>
                                 <Link to="/gamegrid">
                                     <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm">
                                         <h6 className="uppercase font-normal text-sm pb-0.5">Bingofeld</h6>
@@ -125,7 +127,13 @@ const GameView = () => {
                             </div>
                         </div>
                     )}
-
+                </div>
+                <div className="">
+                    <Link to="/gameOverview">
+                        <button className="bg-bgDarkGrayPrimary text-white w-full py-3 rounded-2xl uppercase text-xl mt-3">
+                            Zurück zum Start
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

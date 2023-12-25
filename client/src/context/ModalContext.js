@@ -5,7 +5,7 @@ export const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
     const [isRoundWinnerModalOpen, setIsRoundWinnerModalOpen] = useState(false);
-    const [isGameWinnerModalOpen, setIsGameWinnerModalOpen] = useState(true);
+    const [isGameWinnerModalOpen, setIsGameWinnerModalOpen] = useState(false);
 
     const openRoundWinnerModal = () => setIsRoundWinnerModalOpen(true);
     const closeRoundWinnerModal = () => setIsRoundWinnerModalOpen(false);
