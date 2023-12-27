@@ -16,7 +16,7 @@ const checkIfGameStarted = async () => {
 const GameView = () => {
 
     // definierter Zustand für den Start des Spiels
-    const [gameStarted, setGameStarted] = useState(true);
+    const [gameStarted, setGameStarted] = useState(false);
 
     useEffect(() => {
         // Diese Funktion wird aufgerufen, wenn die Komponente geladen wird.
@@ -115,10 +115,12 @@ const GameView = () => {
                     ):(
                         // Spiel nicht gestartet Screen
                         <div className="">
-                            <div className="uppercase w-full text-center rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm mt-6">
-                                <h6 className="uppercase font-normal text-sm pb-0.5">Möglichen Gossip</h6>
-                                <h4 className="uppercase font-medium text-xl">Eintragen</h4>
-                            </div>
+                            <Link to="/addgossip">
+                                <div className="uppercase w-full text-center rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm mt-6">
+                                    <h6 className="uppercase font-normal text-sm pb-0.5">Möglichen Gossip</h6>
+                                    <h4 className="uppercase font-medium text-xl">Eintragen</h4>
+                                </div>
+                            </Link>
                             <div className="pt-4">
                                 <div className="rounded-lg">
                                     <img src={WaitingGif} alt="Eine wartende Person" className="rounded-xl"/>

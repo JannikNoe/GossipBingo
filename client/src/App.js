@@ -13,6 +13,7 @@ import LoginView from "./components/features/auth/LoginView.js";
 import RegisterView from "./components/features/auth/RegisterView.js";
 import BingoGridView from "./components/features/game/gameComponents/bingoGridView.js";
 import GossipTrackerView from "./components/features/game/gameComponents/GossipTrackerView";
+import AddGossipView from "./components/features/game/gameComponents/AddGossipView";
 import DashboardView from "./components/features/game/dashboard/dashboardView.js";
 import UserManagementView from "./components/features/game/dashboard/UserManagementView.js";
 import SettingsView from "./components/features/settingsView";
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/gameview" element={<GameView />} />
                     <Route path="/gamegrid" element={<BingoGridView />} />
                     <Route path="/gossiptracker" element={<GossipTrackerView />} />
+                    <Route path="/addgossip" element={<AddGossipView />} />
 
                     <Route path="/settings" element={<SettingsView />} />
 
