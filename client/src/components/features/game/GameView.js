@@ -16,7 +16,7 @@ const checkIfGameStarted = async () => {
 const GameView = () => {
 
     // definierter Zustand für den Start des Spiels
-    const [gameStarted, setGameStarted] = useState(false);
+    const [gameStarted, setGameStarted] = useState(true);
 
     useEffect(() => {
         // Diese Funktion wird aufgerufen, wenn die Komponente geladen wird.
