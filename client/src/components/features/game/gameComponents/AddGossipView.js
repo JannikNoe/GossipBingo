@@ -42,7 +42,7 @@ const AddGossipView = () => {
                             <input
                                 type="text"
                                 className="w-full p-1.5 rounded-xl"
-                             />
+                            />
                             <button>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
                                     <g id="Gruppe_69" data-name="Gruppe 69" transform="translate(-312 -229)">
