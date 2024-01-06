@@ -12,10 +12,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/games/create', [GameController::class, 'createGame']);
-Route::get('/games/latest', [GameController::class, 'getLatestGame']);
-Route::put('/games/{id}/status', [GameController::class, 'setGameStatus']);
 
+// Diese Funktionen können nur abgerufen werden, wenn der Nutzer eingeloggt ist.
 Route::middleware(['auth:sanctum'])->group(function () {
     // Abrufen aller Daten bei denen die game_id gleich ist mit der übergebenen id,
     // sowie der Status gleich mit dem übergebenen status ist.
@@ -26,6 +24,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/gossip/{id}', [GossipController::class, 'deleteGossip']);
     // Aktualisierung des Titels eines Gossip-Eintrags anhand der ID.
     Route::put('/gossip/{id}', [GossipController::class, 'updateGossip']);
+    // Neues Spiel erstellen
+    Route::post('/games/create/{title}', [GameController::class, 'createGame']);
+    // Aktuelles Spiel zurückgeben
+    Route::get('/games/latest', [GameController::class, 'getLatestGame']);
+    // Setze den Gamestatus eines Spiels auf einen anderen Wert
+    Route::put('/games/{id}/status/{status}', [GameController::class, 'setGameStatus']);
+
 });
 
 

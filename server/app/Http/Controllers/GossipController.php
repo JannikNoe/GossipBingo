@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Gossip;
+use App\Models\GossipReport;
 use Illuminate\Support\Facades\Auth;
 
 class GossipController extends Controller
@@ -89,4 +90,11 @@ class GossipController extends Controller
 
         return response()->json(['message' => 'Gossip aktualisiert', 'gossip' => $gossip], 200);
     }
+
+
+    /*
+     * Erstelle einen Gossip Report eintrag
+     */
+
+
 }

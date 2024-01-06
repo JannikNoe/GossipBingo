@@ -7,8 +7,8 @@ use App\Models\GameSession;
 
 class GameController extends Controller
 {
-    //Setzte den Spielstatus auf 1
-    public function setGameStatus($id)
+    //Verändere den Spielstatus
+    public function setGameStatus($id,$status)
     {
         $game = GameSession::find($id);
 
@@ -16,15 +16,16 @@ class GameController extends Controller
             return response()->json(['message' => 'Spiel nicht gefunden'], 404);
         }
 
-        $game->status = 1;
+        $game->status = $status;
         $game->save();
 
         return response()->json(['message' => 'Spielstatus auf 1 gesetzt', 'game' => $game], 200);
     }
     //Erstelle eine neue Spielrunde
-    public function createGame()
+    public function createGame($title)
     {
         $game = new GameSession([
+            'title' => $title,
             'status' => 0,
         ]);
 

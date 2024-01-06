@@ -24,11 +24,12 @@ class RegisterController extends Controller
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
 
-           // Profilbild speichern (optional)
+        // Profilbild speichern xttdmx2city(optional)
         if ($request->hasFile('profileImage')) {
             $imagePath = $request->file('profileImage')->store('profile_images');
             $user->user_image = $imagePath;
         }
+
         // Benutzer speichern
         $user->save();
         // Erfolgreiche Registrierungsantwort
