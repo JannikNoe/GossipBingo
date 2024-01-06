@@ -96,7 +96,21 @@ class BingoFieldController extends Controller
             }
 
             if ($isBingo) {
-                // Wenn es ein Bingo gibt, holen Sie den Benutzer aus der user-Tabelle
+                // Überprüfen Sie, ob bereits ein Eintrag in der game_winners-Tabelle vorhanden ist
+                $existingWinner = GameWinner::where('game_id', $gameId)
+                    ->where('user_id', $bingoField->user_id)
+                    ->first();
+
+                if (!$existingWinner) {
+                    // Erstellen Sie einen neuen Eintrag in der game_winners-Tabelle
+                    GameWinner::create([
+                        'game_id' => $gameId,
+                        'user_id' => $bingoField->user_id,
+                        'timestamp' => now(),
+                    ]);
+                }
+
+                // Holen Sie den Benutzer aus der user-Tabelle
                 $user = User::find($bingoField->user_id);
 
                 // Geben Sie den Benutzer als Bingo-Gewinner zurück
@@ -107,5 +121,6 @@ class BingoFieldController extends Controller
         // Wenn kein Bingo gefunden wurde, geben Sie eine entsprechende Meldung zurück
         return response()->json(['message' => 'Kein Bingo gefunden'], 404);
     }
+
 
 }

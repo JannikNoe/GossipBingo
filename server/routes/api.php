@@ -9,6 +9,7 @@ use App\Http\Controllers\GossipController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BingoFieldController;
+use App\Http\Controllers\GameWinnerController;
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -53,6 +54,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/bingo-fields/{gameId}/{userId}', [BingoFieldController::class, 'getOrCreateBingoFieldByGameAndUser']);
     // Prüfen ob es ein Bingo gibt
     Route::get('/bingo-check/{gameId}', [BingoFieldController::class, 'checkBingo']);
+    // Gib mir alle Gewinner
+    Route::get('/game-winners', [GameWinnerController::class, 'getGameWinnersWithDetails']);
+    // Gib mir die Gewinne anhand einer userId
+    Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
 
 
 });
