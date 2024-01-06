@@ -34,7 +34,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/gossip/report/{gossipId}/{userId}', [GossipController::class, 'createReport']);
     // Bestätgigung des Gossip Reports
     Route::put('/gossip/report/{reportId}/confirm/{confirmUserId}', [GossipController::class, 'updateConfirmUserId']);
-
+    // Update E-Mail-Adresse
+    Route::put('/user/update-email/{userId}', [UserController::class, 'updateEmail']);
+    // Update Password
+    Route::put('/user/update-password/{userId}', [UserController::class, 'updatePassword']);
 });
 
 
