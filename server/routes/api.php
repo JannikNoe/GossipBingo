@@ -45,6 +45,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/user/delete/{userId}', [UserController::class, 'deleteUser']);
     // Gebe mir die Statistiken für die Übersicht (Anzahl Spiele, Anzahl Gossip, Anzahl Nutzer)
     Route::get('/counts',  [StatsController::class, 'getCounts']);
+    // Hole alle Nutzer aus der user Tabelle
+    Route::get('/users', [UserController::class, 'getAllUsers']);
 
 });
 

@@ -72,4 +72,12 @@ class UserController extends Controller
         return response()->json(['message' => 'Nutzer erfolgreich gelöscht'], 200);
     }
 
+    public function getAllUsers()
+    {
+        // Hole alle Nutzer aus der "user" Tabelle
+        $users = User::all();
+
+        // Rückgabe der Nutzerliste
+        return response()->json($users, 200);
+    }
 }
