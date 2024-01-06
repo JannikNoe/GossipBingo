@@ -56,4 +56,20 @@ class UserController extends Controller
         return response()->json(['message' => 'Passwort erfolgreich aktualisiert'], 200);
     }
 
+    public function deleteUser($userId)
+    {
+        // Suche den Nutzer anhand seiner "id"
+        $user = User::find($userId);
+
+        if (!$user) {
+            // Der Nutzer wurde nicht gefunden, du kannst hier entsprechend reagieren
+            return response()->json(['message' => 'Nutzer nicht gefunden'], 404);
+        }
+
+        // Lösche den Nutzer aus der Datenbank
+        $user->delete();
+
+        return response()->json(['message' => 'Nutzer erfolgreich gelöscht'], 200);
+    }
+
 }

@@ -38,6 +38,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/user/update-email/{userId}', [UserController::class, 'updateEmail']);
     // Update Password
     Route::put('/user/update-password/{userId}', [UserController::class, 'updatePassword']);
+    // Lösche Benutzer
+    Route::delete('/user/delete/{userId}', [UserController::class, 'deleteUser']);
 });
 
 
