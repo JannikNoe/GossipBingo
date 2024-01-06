@@ -92,7 +92,7 @@ class GossipController extends Controller
     }
 
 
-    /*
+    /**
      * Erstelle einen Gossip Report eintrag
      */
     public function createReport($gossipId, $userId)
@@ -104,6 +104,23 @@ class GossipController extends Controller
         $report->save();
 
         return response()->json(['message' => 'Gossip Report erstellt'], 200);
+    }
+
+    public function updateConfirmUserId($reportId, $confirmUserId)
+    {
+        // Suche den Report in der Datenbank
+        $report = GossipReport::find($reportId);
+
+        if (!$report) {
+            // Der Report wurde nicht gefunden, du kannst hier entsprechend reagieren
+            return response()->json(['message' => 'Report nicht gefunden'], 404);
+        }
+
+        // Aktualisiere den Wert von "confirm_user_id"
+        $report->confirm_user_id = $confirmUserId;
+        $report->save();
+
+        return response()->json(['message' => 'Gossip Report bestätigt'], 200);
     }
 
 }

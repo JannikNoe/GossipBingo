@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/games/{id}/status/{status}', [GameController::class, 'setGameStatus']);
     // Erstelle einen Gossip Report
     Route::post('/gossip/report/{gossipId}/{userId}', [GossipController::class, 'createReport']);
+    // Bestätgigung des Gossip Reports
+    Route::put('/gossip/report/{reportId}/confirm/{confirmUserId}', [GossipController::class, 'updateConfirmUserId']);
 
 });
 
