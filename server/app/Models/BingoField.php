@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BingoField extends Model
 {
+    use HasFactory;
+
     // Angabe der Tabelle, die diesem Modell zugeordnet ist
     protected $table = 'bingo_fields';
 
@@ -30,7 +33,11 @@ class BingoField extends Model
         'field15',
         'field16',
     ];
-
+    // Definieren Sie die Beziehung zum Benutzer
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public $timestamps = true;
 
 

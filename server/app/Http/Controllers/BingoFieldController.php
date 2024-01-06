@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BingoField;
+use App\Models\User;
 
 class BingoFieldController extends Controller
 {
@@ -48,6 +49,63 @@ class BingoFieldController extends Controller
 
         // Rückgabe der aktualisierten Daten
         return response()->json($bingoField, 200);
+    }
+
+
+    public function checkBingo($gameId)
+    {
+        // Holen Sie alle Einträge aus der bingo_fields Tabelle mit der gegebenen gameId
+        $bingoFields = BingoField::where('game_id', $gameId)->get();
+
+        // Definieren Sie die Bingo-Kombinationen
+        $bingoCombinations = [
+            ['field1', 'field2', 'field3', 'field4'],
+            ['field5', 'field6', 'field7', 'field8'],
+            ['field9', 'field10', 'field11', 'field12'],
+            ['field13', 'field14', 'field15', 'field16'],
+            ['field1', 'field5', 'field9', 'field13'],
+            ['field2', 'field6', 'field10', 'field14'],
+            ['field3', 'field7', 'field11', 'field15'],
+            ['field4', 'field8', 'field12', 'field16'],
+            ['field1', 'field6', 'field11', 'field16'],
+            ['field4', 'field7', 'field10', 'field13'],
+        ];
+
+        // Durchlaufe alle Bingo-Einträge
+        foreach ($bingoFields as $bingoField) {
+            $bingoNumbers = [
+                $bingoField->field1, $bingoField->field2, $bingoField->field3, $bingoField->field4,
+                $bingoField->field5, $bingoField->field6, $bingoField->field7, $bingoField->field8,
+                $bingoField->field9, $bingoField->field10, $bingoField->field11, $bingoField->field12,
+                $bingoField->field13, $bingoField->field14, $bingoField->field15, $bingoField->field16,
+            ];
+
+            // Überprüfen Sie, ob mindestens eine Bingo-Kombination den Status "1" hat
+            $isBingo = false;
+
+            foreach ($bingoCombinations as $combination) {
+                if (
+                    in_array($combination[0], $bingoNumbers) &&
+                    in_array($combination[1], $bingoNumbers) &&
+                    in_array($combination[2], $bingoNumbers) &&
+                    in_array($combination[3], $bingoNumbers)
+                ) {
+                    $isBingo = true;
+                    break;
+                }
+            }
+
+            if ($isBingo) {
+                // Wenn es ein Bingo gibt, holen Sie den Benutzer aus der user-Tabelle
+                $user = User::find($bingoField->user_id);
+
+                // Geben Sie den Benutzer als Bingo-Gewinner zurück
+                return response()->json(['winner' => $user], 200);
+            }
+        }
+
+        // Wenn kein Bingo gefunden wurde, geben Sie eine entsprechende Meldung zurück
+        return response()->json(['message' => 'Kein Bingo gefunden'], 404);
     }
 
 }
