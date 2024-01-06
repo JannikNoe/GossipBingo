@@ -95,6 +95,15 @@ class GossipController extends Controller
     /*
      * Erstelle einen Gossip Report eintrag
      */
+    public function createReport($gossipId, $userId)
+    {
+        // Erstelle einen neuen Eintrag in der Tabelle "gossip_reports"
+        $report = new GossipReport();
+        $report->gossip_id = $gossipId;
+        $report->user_id = $userId;
+        $report->save();
 
+        return response()->json(['message' => 'Gossip Report erstellt'], 200);
+    }
 
 }

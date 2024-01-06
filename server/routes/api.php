@@ -30,6 +30,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/games/latest', [GameController::class, 'getLatestGame']);
     // Setze den Gamestatus eines Spiels auf einen anderen Wert
     Route::put('/games/{id}/status/{status}', [GameController::class, 'setGameStatus']);
+    // Erstelle einen Gossip Report
+    Route::post('/gossip/report/{gossipId}/{userId}', [GossipController::class, 'createReport']);
 
 });
 
