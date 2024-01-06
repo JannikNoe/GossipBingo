@@ -6,6 +6,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GossipController;
+use App\Http\Controllers\StatsController;
+use App\Http\Controllers\UserController;
+
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -40,6 +43,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/user/update-password/{userId}', [UserController::class, 'updatePassword']);
     // Lösche Benutzer
     Route::delete('/user/delete/{userId}', [UserController::class, 'deleteUser']);
+    // Gebe mir die Statistiken für die Übersicht (Anzahl Spiele, Anzahl Gossip, Anzahl Nutzer)
+    Route::get('/counts',  [StatsController::class, 'getCounts']);
+
 });
 
 
