@@ -24,3 +24,16 @@ code {
   border-radius: 10px;
 }
 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 1s ease-in-out infinite;
+}
+

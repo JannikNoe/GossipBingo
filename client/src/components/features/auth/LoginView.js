@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PublicHeader from "../../layout/PublicHeaderView";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import GameHeader from "../../layout/GameHeaderView";
 
 const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+                email: email,
+                password: password
+            });
+            // Session-Verwaltung hier einrichten (z.B. JWT Token im Local Storage speichern)
+            // Beispiel: localStorage.setItem('token', response.data.token);
+            navigate('/gameoverview'); // Navigieren zu einer geschützten Seite
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                setError('E-Mail oder Passwort falsch');
+            } else {
+                setError('Ein Fehler ist aufgetreten');
+            }
+        }
+    };
+
     return (
         <div className="bg-bgDarkGrayPrimary h-screen">
             <div className="px-6 md:px-0">
@@ -13,13 +39,14 @@ const Login = () => {
                 <h2 className="text-white text-center text-4xl font-semibold">GossipBingo</h2>
                 <div className="bg-bgGrayPrimary rounded-3xl py-8 mt-6 px-6">
                     <h3 className="text-center text-2xl font-semibold">Login</h3>
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <div className="mt-4">
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-center">
                                 Email
                             </label>
                             <div className="mt-1">
                                 <input
+                                    value={email} onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     name="email"
                                     id="email"
@@ -34,6 +61,7 @@ const Login = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    value={password} onChange={(e) => setPassword(e.target.value)}
                                     type="password"
                                     name="password"
                                     id="password"
@@ -41,12 +69,13 @@ const Login = () => {
                                     placeholder=""
                                 />
                             </div>
-                            <Link for="">
+                            <Link to="">
                                 <p className="text-right text-sm pt-2">Passwort vergessen</p>
                             </Link>
                         </div>
                         <div className="text-center mt-6">
                             <button
+                                type="submit"
                                 className=" uppercase w-3/5 rounded-xl px-3 py-3 text-sm font-semibold bg-bgDarkGrayPrimary text-white shadow-sm">
                                 Einloggen 🎉
                             </button>
@@ -58,6 +87,7 @@ const Login = () => {
                             </Link>
                         </div>
                     </form>
+                    {error && <p>{error}</p>}
                 </div>
             </div>
         </div>

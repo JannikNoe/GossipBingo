@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import GameHeader from "../../layout/GameHeaderView";
 import WaitingGif from '../../../images/gifs/giphy-waiting.gif';
@@ -8,9 +9,15 @@ import CheckedScenariosAccordion from "./gameComponents/CheckedScenariosAccordio
 
 
 const checkIfGameStarted = async () => {
-    // Code, um den Status vom Server oder der Datenbank zu holen
-    // return data.gameStarted;
-    return true; // Hier als Beispiel direkt true zurückgeben
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+        console.log(response.data)
+        const gameStatus = response.data.game ? response.data.game.status : null;
+        return gameStatus !== 0; // Spiel ist gestartet, wenn der Status nicht 0 ist
+    } catch (error) {
+        console.error('Fehler beim Abrufen des Spielstatus', error);
+        return false; // Bei einem Fehler wird das Spiel als nicht gestartet betrachtet
+    }
 };
 
 const GameView = () => {
@@ -19,12 +26,14 @@ const GameView = () => {
     const [gameStarted, setGameStarted] = useState(false);
 
     useEffect(() => {
-        // Diese Funktion wird aufgerufen, wenn die Komponente geladen wird.
-        const fetchData = async () => {
-            const gameStatus = await checkIfGameStarted();
-            setGameStarted(gameStatus);
-        };
-    });
+        const interval = setInterval(async () => {
+            const gameHasStarted = await checkIfGameStarted();
+            setGameStarted(gameHasStarted);
+        }, 20000); // Erneuert den Status alle 5 Sekunden
+
+        return () => clearInterval(interval);
+    }, []);
+
 
     const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
     const [isPastGossipExpanded, setIsPastGossipExpanded] = useState(false);
