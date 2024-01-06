@@ -49,6 +49,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'getAllUsers']);
     // Gebe mir das Bingofield des Nutzers für das aktuelle Spiel oder erstelle eines, sollte es noch nicht vorhanden sein
     Route::get('/bingo-fields/{gameId}/{userId}', [BingoFieldController::class, 'getOrCreateBingoFieldByGameAndUser']);
+    // Speichere das Bingo Feld des Nutzers
+    Route::put('/bingo-fields/{gameId}/{userId}', [BingoFieldController::class, 'getOrCreateBingoFieldByGameAndUser']);
+
 
 });
 

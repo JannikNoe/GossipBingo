@@ -28,4 +28,26 @@ class BingoFieldController extends Controller
         return response()->json($bingoField, 200);
     }
 
+    public function updateBingoFields(Request $request, $gameId, $userId)
+    {
+        // Überprüfe, ob ein Eintrag mit den angegebenen game_id und user_id existiert
+        $bingoField = BingoField::where('game_id', $gameId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if (!$bingoField) {
+            // Wenn kein Eintrag gefunden wurde, kannst du hier entsprechend reagieren
+            return response()->json(['message' => 'Eintrag nicht gefunden'], 404);
+        }
+
+        // Aktualisiere die Felder 'field1' bis 'field16' mit den Daten aus der Anfrage
+        $bingoField->fill($request->only('field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15', 'field16'));
+
+        // Speichere die aktualisierten Daten in der Datenbank
+        $bingoField->save();
+
+        // Rückgabe der aktualisierten Daten
+        return response()->json($bingoField, 200);
+    }
+
 }
