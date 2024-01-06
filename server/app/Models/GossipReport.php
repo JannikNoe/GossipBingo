@@ -14,6 +14,7 @@ class GossipReport extends Model
     protected $fillable = [
         'gossip_id',
         'user_id',
+        'confirm_user_id',
     ];
     public $timestamps = true;
 }

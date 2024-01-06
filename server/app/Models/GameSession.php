@@ -11,6 +11,7 @@ class GameSession extends Model
 
     protected $fillable = [
         'status',
+        'title',
     ];
     public function setGameStatus()
     {

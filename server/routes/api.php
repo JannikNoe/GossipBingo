@@ -8,7 +8,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GossipController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\BingoFieldController;
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -47,6 +47,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/counts',  [StatsController::class, 'getCounts']);
     // Hole alle Nutzer aus der user Tabelle
     Route::get('/users', [UserController::class, 'getAllUsers']);
+    // Gebe mir das Bingofield des Nutzers für das aktuelle Spiel oder erstelle eines, sollte es noch nicht vorhanden sein
+    Route::get('/bingo-fields/{gameId}/{userId}', [BingoFieldController::class, 'getOrCreateBingoFieldByGameAndUser']);
 
 });
 
