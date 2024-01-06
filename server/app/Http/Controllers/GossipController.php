@@ -113,12 +113,21 @@ class GossipController extends Controller
 
         if (!$report) {
             // Der Report wurde nicht gefunden, du kannst hier entsprechend reagieren
-            return response()->json(['message' => 'Report nicht gefunden'], 404);
+            return response()->json(['message' => 'Bericht nicht gefunden'], 404);
         }
 
         // Aktualisiere den Wert von "confirm_user_id"
         $report->confirm_user_id = $confirmUserId;
         $report->save();
+
+        // Aktualisiere den "status" in der Tabelle "gossip"
+        $gossip = Gossip::find($report->gossip_id);
+
+        if ($gossip) {
+            // Setze den "status" auf 1
+            $gossip->status = 1;
+            $gossip->save();
+        }
 
         return response()->json(['message' => 'Gossip Report bestätigt'], 200);
     }
