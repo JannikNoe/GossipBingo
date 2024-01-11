@@ -4,6 +4,7 @@ import './App.css';
 // Router Testcode von GPT
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { AuthProvider } from './services/AuthContext';
 
 import LandingPage from './components/landingpage/LandingpageView';
 import AuthLandingPage from './components/features/auth/AuthLandingPage.js';
@@ -24,28 +25,30 @@ import ModalWrapper from "./components/layout/ModalWrapper";
 function App() {
 
     return (
-        <ModalProvider>
-            <Router>
-                <ModalWrapper /> {/* ModalWrapper innerhalb von Router */}
-                <Routes>
-                    <Route exact path="/" element={<LandingPage />} />
-                    <Route path="/login" element={<LoginView />} />
-                    <Route path="/register" element={<RegisterView />} />
-                    <Route path="/start" element={<AuthLandingPage />} />
+        <AuthProvider>
+            <ModalProvider>
+                <Router>
+                    <ModalWrapper /> {/* ModalWrapper innerhalb von Router */}
+                    <Routes>
+                        <Route exact path="/" element={<LandingPage />} />
+                        <Route path="/login" element={<LoginView />} />
+                        <Route path="/register" element={<RegisterView />} />
+                        <Route path="/start" element={<AuthLandingPage />} />
 
-                    <Route path="/gameoverview" element={<GameOverview />} />
-                    <Route path="/gameview" element={<GameView />} />
-                    <Route path="/gamegrid" element={<BingoGridView />} />
-                    <Route path="/gossiptracker" element={<GossipTrackerView />} />
-                    <Route path="/addgossip" element={<AddGossipView />} />
+                        <Route path="/gameoverview" element={<GameOverview />} />
+                        <Route path="/gameview" element={<GameView />} />
+                        <Route path="/gamegrid" element={<BingoGridView />} />
+                        <Route path="/gossiptracker" element={<GossipTrackerView />} />
+                        <Route path="/addgossip" element={<AddGossipView />} />
 
-                    <Route path="/settings" element={<SettingsView />} />
+                        <Route path="/settings" element={<SettingsView />} />
 
-                    <Route path="/dashboard" element={<DashboardView />} />
-                    <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
-                </Routes>
-            </Router>
-        </ModalProvider>
+                        <Route path="/dashboard" element={<DashboardView />} />
+                        <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
+                    </Routes>
+                </Router>
+            </ModalProvider>
+        </AuthProvider>
     );
 }
 

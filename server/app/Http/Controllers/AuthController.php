@@ -19,19 +19,24 @@ class AuthController extends Controller
             $username = $user->username;
             $profileImage = $user->profile_image;
 
+            // Setzen der Benutzerdaten in der Session
+            $request->session()->put('user', [
+                'userId' => $userId,
+                'email' => $email,
+                'username' => $username,
+                'profileImage' => $profileImage,
+            ]);
+
             return response()->json([
                 'message' => 'Login successful',
                 'userId' => $userId,
                 'email' => $email,
                 'username' => $username,
                 'profileImage' => $profileImage
-
             ], 201);
-
         }
 
         // Authentifizierung fehlgeschlagen
         return response()->json(['message' => 'E-Mail oder Passwort falsch'], 401);
     }
-
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PublicHeader from "../../layout/PublicHeaderView";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import GameHeader from "../../layout/GameHeaderView";
+import {useAuth} from "../../../services/AuthContext";
 
 const Login = () => {
 
@@ -11,6 +11,8 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    const { setIsLoggedIn } = useAuth();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -18,17 +20,28 @@ const Login = () => {
                 email: email,
                 password: password
             });
-            // Session-Verwaltung hier einrichten (z.B. JWT Token im Local Storage speichern)
-            // Beispiel: localStorage.setItem('token', response.data.token);
-            navigate('/gameoverview'); // Navigieren zu einer geschützten Seite
+            console.log('Serverantwort:', response);
+
+            if (response.status === 200) {
+                console.log('Erfolgreich')
+                // Erfolgreicher Login
+                setIsLoggedIn(true);
+                localStorage.setItem('isLoggedIn', 'true');
+                // Speichern Sie hier weitere Benutzerinformationen, wenn erforderlich
+                navigate('/gameoverview'); // Navigieren zu einer geschützten Seite
+            } else {
+                setError('Ein Fehler ist aufgetreten');
+            }
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('E-Mail oder Passwort falsch');
             } else {
+                console.log('NEIN NEIN NEIN')
                 setError('Ein Fehler ist aufgetreten');
             }
         }
     };
+
 
     return (
         <div className="bg-bgDarkGrayPrimary h-screen">
