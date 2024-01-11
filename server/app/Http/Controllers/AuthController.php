@@ -32,7 +32,8 @@ class AuthController extends Controller
                 'userId' => $userId,
                 'email' => $email,
                 'username' => $username,
-                'profileImage' => $profileImage
+                'profileImage' => $profileImage,
+                'session' => $_SESSION['user'],
             ], 201);
         }
 
