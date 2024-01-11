@@ -35,10 +35,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Session::forget('user');
-        Session::flush();
-        return response()->json([
-            'message' => 'Login successful',
-        ], 201);
+        Auth::logout(); // Benutzer ausloggen
+        return response()->json(['message' => 'Logout erfolgreich'], 200);
     }
 }

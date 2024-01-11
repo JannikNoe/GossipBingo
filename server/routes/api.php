@@ -60,7 +60,7 @@ Route::middleware(['checkLogin'])->group(function () {
     // Gib mir die Gewinne anhand einer userId
     Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
     // Logout
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 });
 
 
