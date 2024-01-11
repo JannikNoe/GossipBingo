@@ -27,6 +27,10 @@ const Login = () => {
                 // Erfolgreicher Login
                 setIsLoggedIn(true);
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userId', response.data.session.id);
+                localStorage.setItem('username', response.data.session.username);
+                localStorage.setItem('email', response.data.session.email);
+                console.log(response.data)
                 // Speichern Sie hier weitere Benutzerinformationen, wenn erforderlich
                 navigate('/gameoverview'); // Navigieren zu einer geschützten Seite
             } else {

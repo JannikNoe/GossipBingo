@@ -10,6 +10,8 @@ import CheckedScenariosAccordion from "./gameComponents/CheckedScenariosAccordio
 
 const checkIfGameStarted = async () => {
     try {
+        const storedValue = localStorage.getItem('gameId');
+        console.log(storedValue);
         const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
         console.log(response.data)
         const gameStatus = response.data.game ? response.data.game.status : null;

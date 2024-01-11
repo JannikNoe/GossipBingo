@@ -20,7 +20,7 @@ const DashboardView = () => {
     const getLatestGame = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
-
+            console.log(response);
             if (response.data.game) {
                 setCurrentGameId(response.data.game.id);
                 setGameStatus(response.data.game.status); // Aktualisieren Sie hier den Status
@@ -74,12 +74,16 @@ const DashboardView = () => {
         getLatestGame();
     }, []);
 
+    // zieht aus der LocalStorage
+    const username = localStorage.getItem('username')
+
     return (
         <div>
             <div className="bg-bgDarkGrayPrimary h-full">
                 <GameHeader />
                 <div className="max-w-xl m-auto px-6 pb-14 pt-8">
                     <h2 className="uppercase text-4xl font-semibold text-white">Geschlossene Gesellschaft</h2>
+                    <p className="text-white">{username}</p>
                     <div className="rounded-3xl relative p-5 mt-8 bg-bgGrayPrimary gap-y-2 text-center">
                         <LiveOrOffline status={gameStatus} />
                         <h6 className="uppercase font-semibold pb-0.5 text-xl">Aktueller Spielstatus:</h6>

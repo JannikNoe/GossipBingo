@@ -16,10 +16,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
+    // SOBALD SESSIONKRAM GEKLÄRT = WIEDER IN MIDDLEWARE REINSCHIEBEN!!!!!
 
-// Diese Funktionen können nur abgerufen werden, wenn der Nutzer eingeloggt ist.
-Route::middleware(['checkLogin'])->group(function () {
     // Abrufen aller Daten bei denen die game_id gleich ist mit der übergebenen id,
     // sowie der Status gleich mit dem übergebenen status ist.
     Route::get('/gossip/{gameId}/{status}', [GossipController::class, 'getGossipByGameAndStatus']);
@@ -59,8 +59,11 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/game-winners', [GameWinnerController::class, 'getGameWinnersWithDetails']);
     // Gib mir die Gewinne anhand einer userId
     Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
+
+
+// Diese Funktionen können nur abgerufen werden, wenn der Nutzer eingeloggt ist.
+Route::middleware(['checkLogin'])->group(function () {
+
 });
 
 
