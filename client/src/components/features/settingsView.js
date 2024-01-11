@@ -2,11 +2,20 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import GameHeader from "../layout/GameHeaderView";
 import {useAuth} from "../../services/AuthContext";
+import axios from "axios";
 
 const SettingsView = () => {
 
-    const { isLoggedIn, logout } = useAuth();
+    // const { isLoggedIn, logout } = useAuth();
 
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/logout', {})
+        } catch (error){
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -36,7 +45,7 @@ const SettingsView = () => {
                     </Link>
                     <div
                         className="bg-white text-black rounded-3xl py-6 px-6 mt-4"
-                        onClick={logout}
+                        onClick={handleLogout}
                     >
                         <div className="flex justify-between items-center">
                             <div className="">

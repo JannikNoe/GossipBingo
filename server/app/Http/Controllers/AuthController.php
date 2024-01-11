@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -14,30 +16,29 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentifizierung erfolgreich
             $user = Auth::user();
-            $userId = $user->id;
-            $email = $user->email;
-            $username = $user->username;
-            $profileImage = $user->profile_image;
 
-            // Setzen der Benutzerdaten in der Session
-            $request->session()->put('user', [
-                'userId' => $userId,
-                'email' => $email,
-                'username' => $username,
-                'profileImage' => $profileImage,
-            ]);
+            // Session Starten
+            Session::start();
+
+            // Packt Daten in die Session
+            Session::put('user', $user);
 
             return response()->json([
                 'message' => 'Login successful',
-                'userId' => $userId,
-                'email' => $email,
-                'username' => $username,
-                'profileImage' => $profileImage,
-                'session' => $_SESSION['user'],
+                'session' => $user,
             ], 201);
         }
 
         // Authentifizierung fehlgeschlagen
         return response()->json(['message' => 'E-Mail oder Passwort falsch'], 401);
+    }
+
+    public function logout()
+    {
+        Session::forget('user');
+        Session::flush();
+        return response()->json([
+            'message' => 'Login successful',
+        ], 201);
     }
 }

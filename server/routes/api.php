@@ -17,6 +17,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
+
 // Diese Funktionen können nur abgerufen werden, wenn der Nutzer eingeloggt ist.
 Route::middleware(['checkLogin'])->group(function () {
     // Abrufen aller Daten bei denen die game_id gleich ist mit der übergebenen id,
@@ -58,7 +59,8 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/game-winners', [GameWinnerController::class, 'getGameWinnersWithDetails']);
     // Gib mir die Gewinne anhand einer userId
     Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
-
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 

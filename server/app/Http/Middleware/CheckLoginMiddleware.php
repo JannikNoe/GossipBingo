@@ -15,9 +15,16 @@ class CheckLoginMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->session()->has('user')) {
-            return response()->json(['message' => 'Nicht autorisiert'], 401);
+        try {
+
+            if (!$request->session()->has('user')) {
+                return response()->json(['message' => 'Nicht autorisiert'], 401);
+            }
+            return $next($request);
+
+        } catch(Exception $e) {
+            echo $e->getMessage();
+            dd('Hure');
         }
-        return $next($request);
     }
 }
