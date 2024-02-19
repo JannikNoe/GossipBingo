@@ -21,7 +21,7 @@ const PublicHeader = () => {
                         <span className="opacity-0">|</span>
                         <a href="client/src/components/layout/PublicHeaderView" target="_blank" className="">Datenschmutz</a>
                         <span>|</span>
-                        <Link to="" className="">Log In</Link>
+                        <Link to="login" className="">Log In</Link>
                     </div>
                 </div>
             </div>
