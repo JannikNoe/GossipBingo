@@ -32,7 +32,7 @@ const Login = () => {
                 localStorage.setItem('email', response.data.session.email);
                 console.log(response.data)
                 // Speichern Sie hier weitere Benutzerinformationen, wenn erforderlich
-                navigate('/gameoverview'); // Navigieren zu einer geschützten Seite
+                window.location.replace('/gameoverview'); // Navigieren zu einer geschützten Seite
             } else {
                 setError('Ein Fehler ist aufgetreten');
             }

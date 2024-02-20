@@ -37,7 +37,7 @@ class GameController extends Controller
     //Gib das Spiel mit dem neuesten Zeitstempel und Status 0 zurück.
     public function getLatestGame()
     {
-        $latestGame = GameSession::where('status', 0)->latest()->first();
+        $latestGame = GameSession::latest()->first();
 
         if ($latestGame) {
             return response()->json(['message' => 'Neuestes Spiel abgerufen', 'game' => $latestGame], 200);

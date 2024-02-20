@@ -26,18 +26,11 @@ class GossipController extends Controller
      */
     public function createGossip(Request $request)
     {
-        $user = Auth::user();
-
-        if (!$user || !in_array($user->role, [1])) {
-            return response()->json(['message' => 'Nicht autorisiert'], 403);
-        }
 
         $data = $request->validate([
             'game_id' => 'required|integer',
             'title' => 'required|string|max:256',
         ]);
-
-        $data['gossip_creator'] = $user->id;
 
         $gossip = Gossip::create($data);
 

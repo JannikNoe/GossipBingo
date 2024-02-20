@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GameHeader from "../../../layout/GameHeaderView";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const gameStatusDescriptions = {
@@ -11,10 +11,12 @@ const gameStatusDescriptions = {
     // Fügen Sie hier weitere Statusbeschreibungen hinzu, falls notwendig
 };
 
+
+
 const DashboardView = () => {
 
-    const [currentGameId, setCurrentGameId] = useState(null);
-    const [gameStatus, setGameStatus] = useState('');
+    const navigate = useNavigate();
+    const [gameStatus, setGameStatus] = useState(localStorage.getItem('currentGameStatus'));
     // ... Weitere Zustände
 
     const getLatestGame = async () => {
@@ -22,8 +24,8 @@ const DashboardView = () => {
             const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
             console.log(response);
             if (response.data.game) {
-                setCurrentGameId(response.data.game.id);
-                setGameStatus(response.data.game.status); // Aktualisieren Sie hier den Status
+                localStorage.setItem('currentGameId', response.data.game.id);
+                localStorage.setItem('currentGameStatus', response.data.game.status);
             }
         } catch (error) {
             console.error('Fehler beim Abrufen des neuesten Spiels', error);
@@ -34,36 +36,42 @@ const DashboardView = () => {
         try {
             await axios.post(`http://127.0.0.1:8000/api/games/create/${title}`);
             getLatestGame(); // Aktualisieren Sie die Spiel-ID nach dem Erstellen eines neuen Spiels
+            setGameStatus(0)
         } catch (error) {
             console.error('Fehler beim Erstellen des Spiels', error);
         }
     };
 
     const changeGameStatus = async (newStatus) => {
+
+        const currentGameId = localStorage.getItem('currentGameId');
         if (currentGameId) {
             try {
                 await axios.put(`http://127.0.0.1:8000/api/games/${currentGameId}/status/${newStatus}`);
-                setGameStatus(newStatus); // Aktualisieren Sie hier den Status im State
+                localStorage.setItem('currentGameStatus', newStatus); // Aktualisieren Sie hier den Status im State
+                console.log(newStatus)
+                setGameStatus(newStatus)
+                // navigate('/gameOverview'); // Navigieren zu einer geschützten Seite
             } catch (error) {
-                console.error('Fehler beim Ändern des Spielstatus', error);
+                console.error('Fehler beim Ändern des Spielstatus:', error);
             }
         }
     };
 
-    const LiveOrOffline = ({ status }) => {
+    const LiveOrOffline = ({ status = localStorage.getItem('currentGameStatus')}) => {
         return (
             <div className="flex justify-center mb-2">
-                {status === 3 ? (
+                {gameStatus === 3 ? (
                     <div className="border border-gray-600 rounded-lg w-[80px]">
-                    <span className="text-gray-600 font-semibold text-md block">
-                      OFFLINE
-                    </span>
+                        <span className="text-gray-600 font-semibold text-md block">
+                          OFFLINE
+                        </span>
                     </div>
                 ) : (
                     <div className="border border-red-600 rounded-lg w-[60px]">
-                    <span className="pulse-animation text-red-600 font-semibold text-md block">
-                      • LIVE
-                    </span>
+                        <span className="pulse-animation text-red-600 font-semibold text-md block">
+                          • LIVE
+                        </span>
                     </div>
                 )}
             </div>
@@ -71,7 +79,18 @@ const DashboardView = () => {
     };
 
     useEffect(() => {
-        getLatestGame();
+        const handleStorageChange = () => {
+            // Aktualisiere den gameStatus, wenn sich der Wert in localStorage ändert
+            setGameStatus(localStorage.getItem('currentGameStatus'));
+        };
+
+        // Füge einen Event-Listener hinzu, um Änderungen im Local Storage zu verfolgen
+        window.addEventListener('storage', handleStorageChange);
+
+        // Entferne den Event-Listener, wenn das Komponenten-Unmounted wird
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
     }, []);
 
     // zieht aus der LocalStorage
@@ -90,18 +109,26 @@ const DashboardView = () => {
                         <span className="">{gameStatusDescriptions[gameStatus] || 'Unbekannter Status'}</span>
                     </div>
                     <div className="rounded-3xl relative p-5 mt-8 grid grid-cols-2 gap-x-2 bg-bgGrayPrimary gap-y-2">
-                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold shadow-sm text-white text-center" onClick={createGame}>
+                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold shadow-sm text-white text-center"
+                             onClick={createGame}
+                        >
                             <h6 className="uppercase font-normal text-sm pb-0.5">Spiel</h6>
                             <h4 className="uppercase font-medium text-xl">Erstellen</h4>
                         </div>
-                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold shadow-sm text-white text-center" onClick={() => changeGameStatus(2)}>
+                        <div className="col-span-1 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold shadow-sm text-white text-center"
+                             onClick={() => changeGameStatus(2)}
+                        >
                             <h6 className="uppercase font-normal text-sm pb-0.5">Spiel</h6>
                             <h4 className="uppercase font-medium text-xl">Beenden</h4>
                         </div>
-                        <div className="col-span-2 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-4 text-md font-semibold shadow-sm text-white text-center" onClick={() => changeGameStatus(1)} >
+                        <div className="col-span-2 uppercase w-full rounded-3xl bg-bgDarkGrayPrimary px-3 py-4 text-md font-semibold shadow-sm text-white text-center"
+                             onClick={() => changeGameStatus(1)}
+                        >
                             <h4 className="uppercase font-medium text-xl">Spiel Starten</h4>
                         </div>
-                        <div className="col-span-2 uppercase w-full rounded-3xl px-3 py-4 text-md font-semibold shadow-sm text-DarkGrayPrimary text-center" onClick={() => changeGameStatus(3)}>
+                        <div className="col-span-2 uppercase w-full rounded-3xl px-3 py-4 text-md font-semibold shadow-sm text-DarkGrayPrimary text-center"
+                             onClick={() => changeGameStatus(3)}
+                        >
                             <h4 className="uppercase font-medium text-xl">Spiel Zurücksetzen</h4>
                         </div>
                     </div>
