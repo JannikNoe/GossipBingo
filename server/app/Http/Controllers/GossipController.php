@@ -19,6 +19,9 @@ class GossipController extends Controller
         $gossip = Gossip::getGossipByGameAndStatus($gameId, $status);
 
         return response()->json(['gossip' => $gossip], 201);
+//        echo($gameId);
+//        echo(' ');
+//        echo($status);
     }
 
     /**

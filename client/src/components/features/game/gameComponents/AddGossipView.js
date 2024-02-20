@@ -5,31 +5,35 @@ import TrackingGifs from "./trackingGifs";
 
 
 const openRequests = [
-    { id: 1, text: 'Alkohol steht bereit' },
-    { id: 2, text: 'Geile Menschen sind am Start' },
-    { id: 3, text: 'Bereit für einen geilen Abend' },
-    { id: 4, text: 'Jannik plant eine Kuschel-Ecke für alle' },
-    { id: 5, text: 'Sara organisiert ein spontanes Tanzbattle' },
-    { id: 6, text: 'Max und Anna bereiten das Karaoke-Set vor' },
-    { id: 7, text: 'Kai startet ein Quiz über lustige Fakten' },
-    { id: 8, text: 'Lena und Tom planen eine Mitternachtsüberraschung die auf jeden Fall mit Drogen zu tun hat' },
-    { id: 9, text: 'Emma lädt zu einer Runde Wahrheit oder Pflicht ein' },
-    { id: 10, text: 'Felix organisiert eine Verkleidungschallenge damit die Party richtig spaß macht' },
-    { id: 11, text: 'Nora und Ben bereiten einen Filmeabend vor' }
+    { id: null , text: '' },
+
 ];
 
 
 const AddGossipView = () => {
 
-    const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
+    const [gossipData, setGossipData] = useState([]);
+    const [activeTab, setActiveTab] = useState('openRequests');
     const [expandedBoxes, setExpandedBoxes] = useState({});
     const [text, setText] = useState('');
     const [gameId, setGameId] = useState(null);
 
     useEffect(() => {
         getLatestGameId();
+        loadGossipData();
     }, []);
 
+
+    const loadGossipData = async () => {
+        try {
+            const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
+            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
+            setGossipData(response.data.gossip);
+            console.log(response.data.gossip)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     // toggle der verschiedenen offenen Anfragen Boxen
     const toggleBox = (id) => {
@@ -63,6 +67,8 @@ const AddGossipView = () => {
             console.log(response.data.message);
             // Handle success, e.g., clear input field
             setText('');
+            // Reload gossip data after adding a new gossip
+            loadGossipData();
         } catch (error) {
             console.error('Error:', error.response.data.message);
             // Handle error, e.g., show error message to user
@@ -99,16 +105,16 @@ const AddGossipView = () => {
                             </div>
                         </form>
                         <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
-                            {openRequests.map(request => (
+                            {gossipData.map(gossip => (
                                 <div
-                                    key={request.id}
+                                    key={gossip.id}
                                     className="bg-white py-3 px-5 rounded-3xl my-2"
-                                    onClick={() => toggleBox(request.id)}
+                                    onClick={() => toggleBox(gossip.id)}
                                 >
                                     <div className="flex gap-x-3 items-center">
-                                        <span className="font-semibold text-lg">{request.id}</span>
-                                        <p className={`text-sm ${expandedBoxes[request.id] ? '' : 'line-clamp-2'}`}>
-                                            {request.text}
+                                        <span className="font-semibold text-lg">{gossip.id}</span>
+                                        <p className={`text-sm ${expandedBoxes[gossip.id] ? '' : 'line-clamp-2'}`}>
+                                            {gossip.title}
                                         </p>
                                     </div>
                                 </div>

@@ -13,6 +13,7 @@ import GameView from "./components/features/game/GameView.js";
 import LoginView from "./components/features/auth/LoginView.js";
 import RegisterView from "./components/features/auth/RegisterView.js";
 import BingoGridView from "./components/features/game/gameComponents/bingoGridView.js";
+import EditBingoGridView from "./components/features/game/gameComponents/editBingoGridView";
 import GossipTrackerView from "./components/features/game/gameComponents/GossipTrackerView";
 import AddGossipView from "./components/features/game/gameComponents/AddGossipView";
 import DashboardView from "./components/features/game/dashboard/dashboardView.js";
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/gameoverview" element={<GameOverview />} />
                         <Route path="/gameview" element={<GameView />} />
                         <Route path="/gamegrid" element={<BingoGridView />} />
+                        <Route path="/editgamegrid" element={<EditBingoGridView />} />
                         <Route path="/gossiptracker" element={<GossipTrackerView />} />
                         <Route path="/addgossip" element={<AddGossipView />} />
 

@@ -9,7 +9,7 @@ class Gossip extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['game_id', 'title', 'gossip_creator'];
+    protected $fillable = ['game_id', 'title'];
     protected $table = 'gossip';
 
 
@@ -20,8 +20,7 @@ class Gossip extends Model
     {
         return static::where('game_id', $gameId)
             ->where('status', $status)
-            ->leftJoin('user', 'gossip.gossip_creator', '=', 'user.id')
-            ->select('gossip.*', 'user.username as creator_username')
+            ->select('gossip.*')
             ->get();
     }
 }

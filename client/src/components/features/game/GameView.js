@@ -125,12 +125,20 @@ const GameView = () => {
                     ):(
                         // Spiel nicht gestartet Screen
                         <div className="">
-                            <Link to="/addgossip">
-                                <div className="uppercase w-full text-center rounded-3xl bg-bgDarkGrayPrimary px-3 py-7 text-md font-semibold text-white shadow-sm mt-6">
-                                    <h6 className="uppercase font-normal text-sm pb-0.5">Möglichen Gossip</h6>
-                                    <h4 className="uppercase font-medium text-xl">Eintragen</h4>
-                                </div>
-                            </Link>
+                            <div className="grid grid-cols-2 gap-x-3 mt-4">
+                                <Link to="/addgossip" className="bg-bgDarkGrayPrimary rounded-3xl flex justify-center items-center">
+                                    <div className="uppercase text-center px-3 py-7 text-md font-semibold text-white">
+                                        <h6 className="uppercase font-normal text-sm pb-0.5">Möglichen Gossip</h6>
+                                        <h4 className="uppercase font-medium text-xl">Eintragen</h4>
+                                    </div>
+                                </Link>
+                                <Link to="/editBingoGrid" className="bg-bgDarkGrayPrimary rounded-3xl flex justify-center items-center">
+                                    <div className="uppercase text-center px-3 py-7 text-md font-semibold text-white">
+                                        <h6 className="uppercase font-normal text-sm pb-0.5">Befülle dein</h6>
+                                        <h4 className="uppercase font-medium text-xl">Bingofeld</h4>
+                                    </div>
+                                </Link>
+                            </div>
                             <div className="pt-4">
                                 <div className="rounded-lg">
                                     <img src={WaitingGif} alt="Eine wartende Person" className="rounded-xl"/>
