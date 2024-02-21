@@ -7,8 +7,6 @@ import UncheckedScenariosAccordion from "./gameComponents/UncheckedScenariosAcco
 import CheckedScenariosAccordion from "./gameComponents/CheckedScenariosAccordionView";
 
 
-
-
 const GameView = () => {
 
     // definierter Zustand für den Start des Spiels
