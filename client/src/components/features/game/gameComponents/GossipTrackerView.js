@@ -53,19 +53,18 @@ const GossipTrackerView = () => {
         }));
     };
 
-    const handleConfirmButtonClick = async (reportId) => {
+    const handleConfirmButtonClick = async (id) => {
         try {
-            await axios.put(`http://127.0.0.1:8000/api/gossip/report/${reportId}/confirm/1`);
-            // await axios.put(`http://127.0.0.1:8000/api/gossip/report/${reportId}/confirm/${confirmId}`);
+            await axios.put(`Route::put('/gossip/${id}/status/1`);
             // Update the gossip status in the frontend
             setGossipData(prevState =>
                 prevState.map(gossip =>
-                    gossip.id === reportId ? { ...gossip, status: 1 } : gossip
+                    gossip.id === id ? { ...gossip, status: 1 } : gossip
                 )
             );
             setIsModalOpen(true);
         } catch (error) {
-            console.error('Error:', error.response.data.message);
+            console.error('Error:', error.response);
         }
     };
 
