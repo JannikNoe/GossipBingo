@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import GameHeader from "../../../layout/GameHeaderView";
+import api from "../../../../services/api";
 
 
 
@@ -40,7 +41,7 @@ const BingoGridView = () => {
     const loadGossipData = async () => {
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
-            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
+            const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
             console.log(response.data.gossip)
         } catch (error) {
@@ -50,7 +51,7 @@ const BingoGridView = () => {
 
     const getLatestGameId = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            const response = await api.get('http://127.0.0.1:8000/api/games/latest');
             if (response.data.game) {
                 setGameId(response.data.game.id);
             }

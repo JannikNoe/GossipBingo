@@ -5,6 +5,7 @@ import './App.css';
 import React, { useEffect }from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { AuthProvider } from './services/AuthContext';
+import Api from "./services/api";
 
 import LandingPage from './components/landingpage/LandingpageView';
 import AuthLandingPage from './components/features/auth/AuthLandingPage.js';
@@ -23,6 +24,7 @@ import NotFound from "./components/NotFound";
 
 import { ModalProvider, ModalContext } from './context/ModalContext';
 import ModalWrapper from "./components/layout/ModalWrapper";
+import axios from "axios";
 
 function App() {
     useEffect(() => {

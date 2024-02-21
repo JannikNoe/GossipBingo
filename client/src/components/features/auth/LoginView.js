@@ -22,14 +22,15 @@ const Login = () => {
             });
             console.log('Serverantwort:', response);
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 console.log('Erfolgreich')
                 // Erfolgreicher Login
                 setIsLoggedIn(true);
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userId', response.data.session.id);
-                localStorage.setItem('username', response.data.session.username);
-                localStorage.setItem('email', response.data.session.email);
+                localStorage.setItem('userId', response.data.user.id);
+                localStorage.setItem('username', response.data.user.username);
+                localStorage.setItem('email', response.data.user.email);
+                localStorage.setItem('token', response.data.token)
                 console.log(response.data)
                 // Speichern Sie hier weitere Benutzerinformationen, wenn erforderlich
                 navigate('/gameoverview'); // Navigieren zu einer geschützten Seite

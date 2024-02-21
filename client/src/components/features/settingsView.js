@@ -1,22 +1,27 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import GameHeader from "../layout/GameHeaderView";
 import {useAuth} from "../../services/AuthContext";
 import axios from "axios";
+import api from "../../services/api";
 
 const SettingsView = () => {
 
     // const { isLoggedIn, logout } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
-            // const response = await axios.post('http://127.0.0.1:8000/api/logout')
-            const response = await axios.get('http://127.0.0.1:8000/api/user')
+            const response = await api.post('http://127.0.0.1:8000/api/logout')
+            localStorage.clear()
+            navigate('/login');
         } catch (error){
             console.log(error)
         }
     }
+
+
 
     return (
         <>

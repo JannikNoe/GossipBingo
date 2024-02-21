@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GameHeader from "../../../layout/GameHeaderView";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import api from "../../../../services/api";
 
 const gameStatusDescriptions = {
     0: 'Spiel erstellt',
@@ -15,13 +16,32 @@ const gameStatusDescriptions = {
 
 const DashboardView = () => {
 
+    useEffect(() => {
+
+        getLatestGame();
+
+        const handleStorageChange = () => {
+            // Aktualisiere den gameStatus, wenn sich der Wert in localStorage ändert
+            setGameStatus(localStorage.getItem('currentGameStatus'));
+        };
+
+        // Füge einen Event-Listener hinzu, um Änderungen im Local Storage zu verfolgen
+        window.addEventListener('storage', handleStorageChange);
+
+        // Entferne den Event-Listener, wenn das Komponenten-Unmounted wird
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+
     const navigate = useNavigate();
     const [gameStatus, setGameStatus] = useState(localStorage.getItem('currentGameStatus'));
+    const username = localStorage.getItem('username')
     // ... Weitere Zustände
 
     const getLatestGame = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            const response = await api.get('http://127.0.0.1:8000/api/games/latest');
             console.log(response);
             if (response.data.game) {
                 localStorage.setItem('currentGameId', response.data.game.id);
@@ -34,7 +54,7 @@ const DashboardView = () => {
 
     const createGame = async (title) => {
         try {
-            await axios.post(`http://127.0.0.1:8000/api/games/create/${title}`);
+            await api.post(`http://127.0.0.1:8000/api/games/create/${title}`);
             getLatestGame(); // Aktualisieren Sie die Spiel-ID nach dem Erstellen eines neuen Spiels
             setGameStatus(0)
         } catch (error) {
@@ -47,7 +67,7 @@ const DashboardView = () => {
         const currentGameId = localStorage.getItem('currentGameId');
         if (currentGameId) {
             try {
-                await axios.put(`http://127.0.0.1:8000/api/games/${currentGameId}/status/${newStatus}`);
+                await api.put(`http://127.0.0.1:8000/api/games/${currentGameId}/status/${newStatus}`);
                 localStorage.setItem('currentGameStatus', newStatus); // Aktualisieren Sie hier den Status im State
                 console.log(newStatus)
                 setGameStatus(newStatus)
@@ -78,23 +98,7 @@ const DashboardView = () => {
         );
     };
 
-    useEffect(() => {
-        const handleStorageChange = () => {
-            // Aktualisiere den gameStatus, wenn sich der Wert in localStorage ändert
-            setGameStatus(localStorage.getItem('currentGameStatus'));
-        };
-
-        // Füge einen Event-Listener hinzu, um Änderungen im Local Storage zu verfolgen
-        window.addEventListener('storage', handleStorageChange);
-
-        // Entferne den Event-Listener, wenn das Komponenten-Unmounted wird
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
-
     // zieht aus der LocalStorage
-    const username = localStorage.getItem('username')
 
     return (
         <div>

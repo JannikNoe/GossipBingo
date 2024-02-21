@@ -3,6 +3,7 @@ import GameHeader from "../../../layout/GameHeaderView";
 import TrackingGifs from "./trackingGifs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../../../../services/api";
 
 const openRequests = [
     { id: null , text: '' },
@@ -29,7 +30,7 @@ const GossipTrackerView = () => {
     const loadGossipData = async () => {
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
-            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
+            const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
             // console.log(response.data.gossip)
         } catch (error) {
@@ -39,7 +40,7 @@ const GossipTrackerView = () => {
 
     const getLatestGameId = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            const response = await api.get('http://127.0.0.1:8000/api/games/latest');
             if (response.data.game) {
                 setGameId(response.data.game.id);
             }
@@ -57,7 +58,7 @@ const GossipTrackerView = () => {
 
     const handleConfirmButtonClick = async (id) => {
         try {
-            await axios.put(`http://127.0.0.1:8000/api/gossip/${id}/status/1`);
+            await api.put(`http://127.0.0.1:8000/api/gossip/${id}/status/1`);
             // Update the gossip status in the frontend
             setGossipData(prevState =>
                 prevState.map(gossip =>

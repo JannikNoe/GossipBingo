@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import api from "../../../../services/api";
 
 
 const CheckedScenariosAccordion = () => {
@@ -18,7 +19,7 @@ const CheckedScenariosAccordion = () => {
     const loadGossipData = async () => {
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
-            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/1`); // Fetching gossip with status 0
+            const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/1`); // Fetching gossip with status 0
             setGossipData(response.data.gossip.map(gossip => ({
                 ...gossip,
                 formattedTimestamp: formatTimestamp(gossip.updated_at) // Hinzufügen des formatierten Timestamps zu jedem Gossip-Eintrag

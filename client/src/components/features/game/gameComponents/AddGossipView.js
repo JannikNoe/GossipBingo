@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import GameHeader from "../../../layout/GameHeaderView";
 import TrackingGifs from "./trackingGifs";
+import api from "../../../../services/api";
 
 
 const openRequests = [
@@ -27,7 +28,7 @@ const AddGossipView = () => {
     const loadGossipData = async () => {
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
-            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
+            const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
             console.log(response.data.gossip)
         } catch (error) {
