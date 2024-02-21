@@ -25,11 +25,11 @@ const GameHeader = () => {
                             <path id="arrow-left-long" d="M.286,102.9a1.139,1.139,0,0,0,0,1.615L6.766,111a1.142,1.142,0,1,0,1.615-1.615l-4.526-4.526H18.229c.634,0,1.394-.469,1.394-1.1a1.419,1.419,0,0,0-1.394-1.189H3.855l4.526-4.527a1.142,1.142,0,0,0-1.615-1.615Z" transform="translate(0.3 -95.753)" stroke="#000" stroke-width="0.5"/>
                         </svg>
                     </div>
-                    <div className="bg-white rounded-full p-2.5" onClick={toggleMobileNav}>
-                        <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.132 14.742">
-                            <path id="menu_FILL0_wght400_GRAD0_opsz48" d="M6,25.742V24.024H23.132v1.718ZM6,19.73V18.012H23.132V19.73Zm0-6.012V12H23.132v1.718Z" transform="translate(-5.5 -11.5)" fill="#202020" stroke="#202020" stroke-linejoin="round" stroke-width="1"/>
-                        </svg>
-                    </div>
+                    {/*<div className="bg-white rounded-full p-2.5" onClick={toggleMobileNav}>*/}
+                    {/*    <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.132 14.742">*/}
+                    {/*        <path id="menu_FILL0_wght400_GRAD0_opsz48" d="M6,25.742V24.024H23.132v1.718ZM6,19.73V18.012H23.132V19.73Zm0-6.012V12H23.132v1.718Z" transform="translate(-5.5 -11.5)" fill="#202020" stroke="#202020" stroke-linejoin="round" stroke-width="1"/>*/}
+                    {/*    </svg>*/}
+                    {/*</div>*/}
                 </div>
             </div>
             {mobileNavOpen && (

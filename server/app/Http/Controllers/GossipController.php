@@ -102,7 +102,7 @@ class GossipController extends Controller
         return response()->json(['message' => 'Gossip Report erstellt'], 200);
     }
 
-    public function updateConfirmUserId($reportId, $confirmUserId)
+    public function updateConfirmUserId($reportId)
     {
         // Suche den Report in der Datenbank
         $report = GossipReport::find($reportId);
@@ -112,9 +112,9 @@ class GossipController extends Controller
             return response()->json(['message' => 'Bericht nicht gefunden'], 404);
         }
 
-        // Aktualisiere den Wert von "confirm_user_id"
-        $report->confirm_user_id = $confirmUserId;
-        $report->save();
+//        // Aktualisiere den Wert von "confirm_user_id"
+//        $report->confirm_user_id = $confirmUserId;
+//        $report->save();
 
         // Aktualisiere den "status" in der Tabelle "gossip"
         $gossip = Gossip::find($report->gossip_id);

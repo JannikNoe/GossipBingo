@@ -3,17 +3,24 @@ import GameHeader from "../../../layout/GameHeaderView";
 import TrackingGifs from "./trackingGifs";
 import axios from "axios";
 
+const openRequests = [
+    { id: null , text: '' },
+];
 
 const GossipTrackerView = () => {
 
     // toggle der verschiedenen offenen Anfragen Boxen
-    const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
-    const [expandedBoxes, setExpandedBoxes] = useState({});
     const [gossipData, setGossipData] = useState([]);
+    const [expandedBoxes, setExpandedBoxes] = useState({});
+    const [text, setText] = useState('');
     const [gameId, setGameId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedGossipId, setSelectedGossipId] = useState(null);
+    const [selectedNumber, setSelectedNumber] = useState(null);
 
     useEffect(() => {
         loadGossipData();
+        getLatestGameId();
     }, []);
 
 
@@ -28,6 +35,17 @@ const GossipTrackerView = () => {
         }
     };
 
+    const getLatestGameId = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            if (response.data.game) {
+                setGameId(response.data.game.id);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     const toggleBox = (id) => {
         setExpandedBoxes(prevState => ({
             ...prevState,
@@ -35,14 +53,20 @@ const GossipTrackerView = () => {
         }));
     };
 
-
-    // Modal Handler
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedNumber, setSelectedNumber] = useState(null);
-
-    const handleFieldClick = (number) => {
-        setSelectedNumber(number);
-        setIsModalOpen(true);
+    const handleConfirmButtonClick = async (reportId) => {
+        try {
+            await axios.put(`http://127.0.0.1:8000/api/gossip/report/${reportId}/confirm/1`);
+            // await axios.put(`http://127.0.0.1:8000/api/gossip/report/${reportId}/confirm/${confirmId}`);
+            // Update the gossip status in the frontend
+            setGossipData(prevState =>
+                prevState.map(gossip =>
+                    gossip.id === reportId ? { ...gossip, status: 1 } : gossip
+                )
+            );
+            setIsModalOpen(true);
+        } catch (error) {
+            console.error('Error:', error.response.data.message);
+        }
     };
 
     const closeModal = () => {
@@ -50,8 +74,8 @@ const GossipTrackerView = () => {
         setSelectedNumber(null);
     };
 
-    const Modal = ({ isOpen, number, onClose }) => {
-        if (!isOpen || !number) return null;
+    const Modal = ({ isOpen, onClose }) => {
+        if (!isOpen) return null;
 
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -76,30 +100,26 @@ const GossipTrackerView = () => {
                 <div className="max-w-xl m-auto px-6 pb-14">
                     <h3 className="uppercase text-4xl font-semibold text-white pt-8">Hier<br/>Gossip Tracken</h3>
                     <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
-                        <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
-                            {activeTab === 'openRequests' &&
-                                <>
-                                    {gossipData.map(gossip => (
-                                        <div
-                                            key={gossip.id}
-                                            className="bg-white py-3 px-5 rounded-3xl my-2"
-                                            onClick={() => toggleBox(gossip.id)}
-                                        >
-                                            <div className="flex gap-x-3 items-center">
-                                                <span className="font-semibold text-lg">{gossip.id}</span>
-                                                <p className={`text-sm ${expandedBoxes[gossip.id] ? '' : 'line-clamp-2'}`}>
-                                                    {gossip.title}
-                                                </p>
-                                            </div>
-                                            {expandedBoxes[gossip.id] && (
-                                                <div className="text-center mt-4 mb-2">
-                                                    <button onClick={handleFieldClick} className="bg-bgDarkGrayPrimary text-white w-full py-3 rounded-xl">Gossip bestätigen</button>
-                                                </div>
-                                            )}
+                        <div className={`transition-all duration-500 opacity-100`}>
+                            {gossipData.map(gossip => (
+                                <div
+                                    key={gossip.id}
+                                    className="bg-white py-3 px-5 rounded-3xl my-2"
+                                    onClick={() => toggleBox(gossip.id)}
+                                >
+                                    <div className="flex gap-x-3 items-center">
+                                        <span className="font-semibold text-lg">{gossip.id}</span>
+                                        <p className={`text-sm ${expandedBoxes[gossip.id] ? '' : 'line-clamp-2'}`}>
+                                            {gossip.title}
+                                        </p>
+                                    </div>
+                                    {expandedBoxes[gossip.id] && (
+                                        <div className="text-center mt-4 mb-2">
+                                            <button onClick={() => handleConfirmButtonClick(gossip.id)} className="bg-bgDarkGrayPrimary text-white w-full py-3 rounded-xl">Gossip bestätigen</button>
                                         </div>
-                                    ))}
-                                </>
-                            }
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
