@@ -87,8 +87,6 @@ class GossipController extends Controller
 
     public function updateStatus($id, $status)
     {
-        echo $id;
-        echo $status;
         $gossip = Gossip::find($id);
 
         if ($gossip) {
