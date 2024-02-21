@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import GameHeader from "../../../layout/GameHeaderView";
 
@@ -28,6 +29,36 @@ const BingoGridView = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState(null);
+    const [gossipData, setGossipData] = useState([]);
+    const [gameId, setGameId] = useState(null);
+
+    useEffect(() => {
+        getLatestGameId();
+        loadGossipData();
+    }, []);
+
+    const loadGossipData = async () => {
+        try {
+            const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
+            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
+            setGossipData(response.data.gossip);
+            console.log(response.data.gossip)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const getLatestGameId = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            if (response.data.game) {
+                setGameId(response.data.game.id);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 
     const handleFieldClick = (number) => {
         setSelectedNumber(number);
@@ -45,7 +76,7 @@ const BingoGridView = () => {
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-3xl w-[80%]">
-                    <h2 className="text-xl font-bold">Gossip Details</h2>
+                    <h2 className="text-xl font-bold">Gossip hinterlegen</h2>
                     <p className="my-3">{number.gossip}</p>
                     <hr className="my-3" />
                     <p>Status:<span className={number.status? "ml-2 bg-green-500 py-0.5 px-2 rounded-md text-white text-sm" : "ml-2 bg-red-500 py-0.5 px-2 rounded-md text-white text-sm"}>{number.status ? "Bereits geschehen" : "Noch nicht geschehen"}</span></p>
@@ -64,7 +95,7 @@ const BingoGridView = () => {
         <div className="bg-bgGamePrimary h-screen">
             <GameHeader />
             <div className="max-w-xl m-auto px-6 pb-14">
-                <h3 className="uppercase text-4xl font-semibold text-white pt-8">Dein Bingofeld</h3>
+                <h3 className="uppercase text-4xl font-semibold text-white pt-8">Befülle dein Bingofeld</h3>
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     <div className="grid grid-cols-4 gap-1.5">
                         {bingoNumbers.map(Numbers => (
