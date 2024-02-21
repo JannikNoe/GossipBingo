@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import GameHeader from "../../../layout/GameHeaderView";
 import TrackingGifs from "./trackingGifs";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const openRequests = [
     { id: null , text: '' },
@@ -22,6 +23,7 @@ const GossipTrackerView = () => {
         loadGossipData();
         getLatestGameId();
     }, []);
+
 
 
     const loadGossipData = async () => {
@@ -55,7 +57,7 @@ const GossipTrackerView = () => {
 
     const handleConfirmButtonClick = async (id) => {
         try {
-            await axios.put(`Route::put('/gossip/${id}/status/1`);
+            await axios.put(`http://127.0.0.1:8000/api/gossip/${id}/status/1`);
             // Update the gossip status in the frontend
             setGossipData(prevState =>
                 prevState.map(gossip =>
@@ -82,11 +84,13 @@ const GossipTrackerView = () => {
                     <TrackingGifs></TrackingGifs>
                     <h3 className="text-center text-5xl font-semibold pt-4">DONE</h3>
                     <p className="text-center text-lg pt-1">Dein Gossip wurde in die Welt getragen.</p>
-                    <button
-                        onClick={onClose}
-                        className="uppercase w-full rounded-2xl bg-bgDarkGrayPrimary px-3 py-3 text-md font-semibold text-white shadow-sm mt-4">
-                        Schließen
-                    </button>
+                    <Link to="/gameview">
+                        <button
+                            onClick={onClose}
+                            className="uppercase w-full rounded-2xl bg-bgDarkGrayPrimary px-3 py-3 text-md font-semibold text-white shadow-sm mt-4">
+                            Schließen
+                        </button>
+                    </Link>
                 </div>
             </div>
         );

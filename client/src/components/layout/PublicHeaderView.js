@@ -60,10 +60,6 @@ const PublicHeader = () => {
                                 <span className="relative z-[99] font-semibold text-xl">Spieleanleitung</span>
                                 {/*<span className="absolute inset-x-0 bottom-0.5 h-2 w-40 rounded-lg bg-yellow-300/60 z-[10]"></span>*/}
                             </Link>
-                            <Link to="/" className="relative group">
-                                <span className="relative z-[99] font-semibold text-xl">Über uns</span>
-                                {/*<span className="absolute inset-x-0 bottom-0.5 h-2 w-40 rounded-lg bg-yellow-300/60 z-[10]"></span>*/}
-                            </Link>
                         </div>
                         <div className="ml-8 mt-4">
                             <hr className="h-[10px] w-4/5 color-black" />

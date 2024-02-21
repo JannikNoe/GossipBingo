@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // Router Testcode von GPT
-import React from 'react';
+import React, { useEffect }from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { AuthProvider } from './services/AuthContext';
 
@@ -19,11 +19,16 @@ import AddGossipView from "./components/features/game/gameComponents/AddGossipVi
 import DashboardView from "./components/features/game/dashboard/dashboardView.js";
 import UserManagementView from "./components/features/game/dashboard/UserManagementView.js";
 import SettingsView from "./components/features/settingsView";
+import NotFound from "./components/NotFound";
 
 import { ModalProvider, ModalContext } from './context/ModalContext';
 import ModalWrapper from "./components/layout/ModalWrapper";
 
 function App() {
+    useEffect(() => {
+        // Setze den Titel beim Laden der Komponente
+        document.title = "GossipBingo";
+    }, []); // Dieser Effekt wird nur einmal beim Laden der Komponente ausgeführt
 
     return (
         <AuthProvider>
@@ -47,6 +52,7 @@ function App() {
 
                         <Route path="/dashboard" element={<DashboardView />} />
                         <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Router>
             </ModalProvider>

@@ -64,11 +64,11 @@ const UncheckedScenariosAccordion = () => {
                                     {gossip.title}
                                 </p>
                             </div>
-                            {expandedBoxes[gossip.id] && (
-                                <div className="text-center mt-4 mb-2">
-                                    <button className="bg-bgDarkGrayPrimary text-white w-full py-3 rounded-xl">Gossip bestätigen</button>
-                                </div>
-                            )}
+                            {/*{expandedBoxes[gossip.id] && (*/}
+                            {/*    <div className="text-center mt-4 mb-2">*/}
+                            {/*        <button className="bg-bgDarkGrayPrimary text-white w-full py-3 rounded-xl">Gossip bestätigen</button>*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                         </div>
                     ))}
                     {/* Hier könnten weitere Elemente oder Kommentare stehen */}

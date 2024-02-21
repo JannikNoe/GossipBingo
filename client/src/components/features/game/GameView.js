@@ -79,7 +79,7 @@ const GameView = () => {
                                     <div
                                         className={`flex-1 px-4 py-2 rounded-full uppercase text-sm text-center flex items-center ${activeTab === 'openRequests' ? 'bg-bgGrayPrimary text-bgGrayPrimary' : 'bg-bgDarkGrayPrimary text-white'}`}
                                         onClick={() => setActiveTab('openRequests')}>
-                                        <span>Offene Anfragen</span>
+                                        <span>Offener Gossip</span>
                                         {/*<div className="w-[18px] h-[18px] bg-bgDarkGrayPrimary text-white rounded-full absolute flex justify-center items-center top-[30%] left-[38%]">*/}
                                         {/*    <span className="text-[10px]">4</span>*/}
                                         {/*</div>*/}

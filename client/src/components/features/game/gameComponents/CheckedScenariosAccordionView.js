@@ -1,24 +1,39 @@
 import React, {useState, useEffect} from 'react';
+import axios from "axios";
 
-const openRequests = [
-    { id: 1, text: 'Alex richtet eine Smoothie-Bar ein', timestamp: '24.12.2023 - 18:00 Uhr', userId: 101 },
-    { id: 2, text: 'Bea und Chris veranstalten ein virtuelles Reality-Spielturnier', timestamp: '24.12.2023 - 18:30 Uhr', userId: 102 },
-    { id: 3, text: 'Diana organisiert einen Outdoor-Filmabend', timestamp: '24.12.2023 - 19:00 Uhr', userId: 103 },
-    { id: 4, text: 'Erik und Fiona bereiten ein Gourmet-Grillfest vor', timestamp: '24.12.2023 - 19:30 Uhr', userId: 104 },
-    { id: 5, text: 'Greta und Henry veranstalten eine Kostümparty mit einem bestimmten Thema', timestamp: '24.12.2023 - 20:00 Uhr', userId: 105 },
-    { id: 6, text: 'Iris und Jonas organisieren einen Spieleabend mit Brettspielen und Kartenspielen', timestamp: '24.12.2023 - 20:30 Uhr', userId: 106 },
-    { id: 7, text: 'Karl führt eine Open-Mic-Nacht ein', timestamp: '24.12.2023 - 21:00 Uhr', userId: 107 },
-    { id: 8, text: 'Lena und Max planen eine Schatzsuche im Garten oder Haus', timestamp: '24.12.2023 - 21:30 Uhr', userId: 108 },
-    { id: 9, text: 'Nina lädt zu einem Workshop für kreatives Malen oder Handwerk ein', timestamp: '24.12.2023 - 22:00 Uhr', userId: 109 },
-    { id: 10, text: 'Oliver und Petra organisieren einen Tanzwettbewerb mit verschiedenen Musikgenres', timestamp: '24.12.2023 - 22:30 Uhr', userId: 110 },
-    { id: 11, text: 'Quentin und Rita bereiten ein internationales Buffet vor', timestamp: '24.12.2023 - 23:00 Uhr', userId: 111 }
-];
 
 const CheckedScenariosAccordion = () => {
 
     // toggle der verschiedenen offenen Anfragen Boxen
     const [activeTab, setActiveTab] = useState('openRequests'); // 'openRequests' oder 'pastGossip'
     const [expandedBoxes, setExpandedBoxes] = useState({});
+    const [gossipData, setGossipData] = useState([]);
+    const [gameId, setGameId] = useState(null);
+
+    useEffect(() => {
+        loadGossipData();
+    }, []);
+
+
+    const loadGossipData = async () => {
+        try {
+            const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
+            const response = await axios.get(`http://127.0.0.1:8000/api/gossip/${gameId}/1`); // Fetching gossip with status 0
+            setGossipData(response.data.gossip.map(gossip => ({
+                ...gossip,
+                formattedTimestamp: formatTimestamp(gossip.updated_at) // Hinzufügen des formatierten Timestamps zu jedem Gossip-Eintrag
+            })));
+            console.log(response.data.gossip)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const formatTimestamp = (timestamp) => {
+        const date = new Date(timestamp);
+        const formattedDate = `${date.getHours()}:${date.getMinutes()} Uhr - ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        return formattedDate;
+    };
 
     const toggleBox = (id) => {
         setExpandedBoxes(prevState => ({
@@ -32,11 +47,11 @@ const CheckedScenariosAccordion = () => {
         <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
             {activeTab === 'openRequests' &&
                 <>
-                    {openRequests.map(request => (
+                    {gossipData.map(gossip => (
                         <div
-                            key={request.id}
+                            key={gossip.id}
                             className="bg-white py-3 px-5 rounded-3xl my-2"
-                            onClick={() => toggleBox(request.id)}
+                            onClick={() => toggleBox(gossip.id)}
                         >
                             <div className="flex gap-x-3 items-center relative mt-2">
                                 <svg className="w-[20px] h-[20px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
@@ -46,22 +61,22 @@ const CheckedScenariosAccordion = () => {
                                     </g>
                                 </svg>
                                 <div className="bg-black rounded-full py-1 px-3">
-                                    <p className="text-white text-[11px]">{request.timestamp}</p>
+                                    <p className="text-white text-[11px]">{gossip.formattedTimestamp}</p>
                                 </div>
                             </div>
-                            <p className="text-sm pt-4">{request.text}</p>
+                            <p className="text-sm pt-4">{gossip.title}</p>
 
-                            {expandedBoxes[request.id] && (
-                                <div>
-                                    <h6 className="text-sm pt-2">Bestätigt von</h6>
-                                    <div className="flex mt-1">
-                                        <img src="client/src/components/features/game/GameView" alt="" className="bg-black w-[30px] h-[30px] rounded-full border-white border-1" />
-                                        <div className="bg-black w-[30px] h-[30px] rounded-full border-white border-1 text-white text-xs font-semibold flex justify-center items-center">
-                                            <span className="block ">+4</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                            {/*{expandedBoxes[gossip.id] && (*/}
+                            {/*    <div>*/}
+                            {/*        <h6 className="text-sm pt-2">Bestätigt von</h6>*/}
+                            {/*        <div className="flex mt-1">*/}
+                            {/*            <img src="client/src/components/features/game/GameView" alt="" className="bg-black w-[30px] h-[30px] rounded-full border-white border-1" />*/}
+                            {/*            <div className="bg-black w-[30px] h-[30px] rounded-full border-white border-1 text-white text-xs font-semibold flex justify-center items-center">*/}
+                            {/*                <span className="block ">+4</span>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                         </div>
                     ))}
                     {/* Hier könnten weitere Elemente oder Kommentare stehen */}
