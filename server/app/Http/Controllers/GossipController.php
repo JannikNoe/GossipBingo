@@ -19,9 +19,6 @@ class GossipController extends Controller
         $gossip = Gossip::getGossipByGameAndStatus($gameId, $status);
 
         return response()->json(['gossip' => $gossip], 201);
-//        echo($gameId);
-//        echo(' ');
-//        echo($status);
     }
 
     /**
@@ -88,40 +85,12 @@ class GossipController extends Controller
     }
 
 
-    /**
-     * Erstelle einen Gossip Report eintrag
-     */
-    public function createReport($gossipId)
+    public function updateStatus($gossipId, $status)
     {
-        // Erstelle einen neuen Eintrag in der Tabelle "gossip_reports"
-        $report = new GossipReport();
-        $report->gossip_id = $gossipId;
-//        $report->user_id = $userId;
-        $report->save();
-
-        return response()->json(['message' => 'Gossip Report erstellt'], 200);
-    }
-
-    public function updateConfirmUserId($reportId)
-    {
-        // Suche den Report in der Datenbank
-        $report = GossipReport::find($reportId);
-
-        if (!$report) {
-            // Der Report wurde nicht gefunden, du kannst hier entsprechend reagieren
-            return response()->json(['message' => 'Bericht nicht gefunden'], 404);
-        }
-
-//        // Aktualisiere den Wert von "confirm_user_id"
-//        $report->confirm_user_id = $confirmUserId;
-//        $report->save();
-
-        // Aktualisiere den "status" in der Tabelle "gossip"
-        $gossip = Gossip::find($report->gossip_id);
+        $gossip = Gossip::find($gossipId);
 
         if ($gossip) {
-            // Setze den "status" auf 1
-            $gossip->status = 1;
+            $gossip->status = $status;
             $gossip->save();
         }
 

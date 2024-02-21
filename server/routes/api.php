@@ -32,10 +32,8 @@ Route::post('/login', [AuthController::class, 'login']);
     Route::get('/games/latest', [GameController::class, 'getLatestGame']);
     // Setze den Gamestatus eines Spiels auf einen anderen Wert
     Route::put('/games/{id}/status/{status}', [GameController::class, 'setGameStatus']);
-    // Erstelle einen Gossip Report
-    Route::post('/gossip/report/{gossipId}/{userId}', [GossipController::class, 'createReport']);
-    // Bestätgigung des Gossip Reports
-    Route::put('/gossip/report/{reportId}/confirm/{confirmUserId}', [GossipController::class, 'updateConfirmUserId']);
+    // Bestätgigung des Gossips
+    Route::put('/gossip/{id}/status/{status}', [GossipController::class, 'updateStatus']);
     // Update E-Mail-Adresse
     Route::put('/user/update-email/{userId}', [UserController::class, 'updateEmail']);
     // Update Password
