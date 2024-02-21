@@ -33,6 +33,25 @@ class AuthController extends Controller
         return response()->json(['message' => 'E-Mail oder Passwort falsch'], 401);
     }
 
+    // Sanctum login laut chatgpt
+//    public function login(Request $request)
+//    {
+//        $credentials = $request->only('email', 'password');
+//
+//        if (Auth::attempt($credentials)) {
+//            $user = Auth::user();
+//            $token = $user->createToken('authToken')->plainTextToken;
+//
+//            return response()->json([
+//                'message' => 'Login successful',
+//                'user' => $user,
+//                'token' => $token,
+//            ], 200);
+//        }
+//
+//        return response()->json(['message' => 'E-Mail oder Passwort falsch'], 401);
+//    }
+
     public function logout()
     {
         Auth::logout(); // Benutzer ausloggen
