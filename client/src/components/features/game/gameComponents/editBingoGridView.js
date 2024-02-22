@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import GameHeader from "../../../layout/GameHeaderView";
 import api from "../../../../services/api";
 
@@ -32,8 +32,12 @@ const BingoGridView = () => {
     const [selectedNumber, setSelectedNumber] = useState(null);
     const [gossipData, setGossipData] = useState([]);
     const [gameId, setGameId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!localStorage.getItem('token')){
+            navigate('/login')
+        }
         getLatestGameId();
         loadGossipData();
     }, []);

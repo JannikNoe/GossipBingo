@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import GameHeader from "../../layout/GameHeaderView";
 
 const requirementList = [
@@ -8,7 +8,19 @@ const requirementList = [
     { id: 3, text: 'Bereit für einen geilen Abend' },
 ];
 
+
+
 const GameOverview = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')){
+            navigate('/login')
+        }
+
+    }, []);
+
     return (
         <div className="bg-bgDarkGrayPrimary">
             <GameHeader />

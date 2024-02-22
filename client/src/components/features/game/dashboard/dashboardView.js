@@ -17,18 +17,14 @@ const gameStatusDescriptions = {
 const DashboardView = () => {
 
     useEffect(() => {
-
+        if (!localStorage.getItem('token')){
+            navigate('/login')
+        }
         getLatestGame();
-
         const handleStorageChange = () => {
-            // Aktualisiere den gameStatus, wenn sich der Wert in localStorage ändert
             setGameStatus(localStorage.getItem('currentGameStatus'));
         };
-
-        // Füge einen Event-Listener hinzu, um Änderungen im Local Storage zu verfolgen
         window.addEventListener('storage', handleStorageChange);
-
-        // Entferne den Event-Listener, wenn das Komponenten-Unmounted wird
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
