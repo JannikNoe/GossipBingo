@@ -46,7 +46,7 @@ function App() {
                         <Route path="/gameoverview" element={<GameOverview />} />
                         <Route path="/gameview" element={<GameView />} />
                         <Route path="/gamegrid" element={<BingoGridView />} />
-                        <Route path="/editgamegrid" element={<EditBingoGridView />} />
+                        <Route path="/editBingogrid" element={<EditBingoGridView />} />
                         <Route path="/gossiptracker" element={<GossipTrackerView />} />
                         <Route path="/addgossip" element={<AddGossipView />} />
 

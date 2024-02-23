@@ -7,22 +7,22 @@ import api from "../../../../services/api";
 
 
 const bingoNumbers = [
-    { field: '1', number: '1', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod', status: true },
-    { field: '2', number: '2', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-    { field: '3', number: '3', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '4', number: '4', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '5', number: '5', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '6', number: '6', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '7', number: '7', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '8', number: '8', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-    { field: '9', number: '9', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '10', number: '32', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '11', number: '11', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '12', number: '25', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-    { field: '13', number: '29', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '14', number: '31', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '15', number: '39', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-    { field: '16', number: '16', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
+    { field: '1', number: '1', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod' },
+    { field: '2', number: '2', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '3', number: '3', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '4', number: '4', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '5', number: '5', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '6', number: '6', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '7', number: '7', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '8', number: '8', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'},
+    { field: '9', number: '9', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '10', number: '32', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '11', number: '11', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '12', number: '25', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '13', number: '29', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '14', number: '31', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '15', number: '39', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
+    { field: '16', number: '16', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',},
 ];
 
 
@@ -104,7 +104,7 @@ const BingoGridView = () => {
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     <div className="grid grid-cols-4 gap-1.5">
                         {bingoNumbers.map(Numbers => (
-                            <div className={Numbers.status? "bg-white rounded-lg relative border-2 border-black/60" : "bg-white rounded-lg relative"}
+                            <div className="bg-white rounded-lg relative"
                                  onClick={() => handleFieldClick(Numbers)}
                             >
                                 <span className="flex justify-center items-center h-[90px] text-black">{Numbers.number}</span>
