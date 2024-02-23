@@ -48,7 +48,7 @@ const AddGossipView = () => {
 
     const getLatestGameId = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/games/latest');
+            const response = await api.get('http://127.0.0.1:8000/api/games/latest');
             if (response.data.game) {
                 setGameId(response.data.game.id);
             }
@@ -64,7 +64,7 @@ const AddGossipView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/gossip', { game_id: gameId, title: text });
+            const response = await api.post('http://127.0.0.1:8000/api/gossip', { game_id: gameId, title: text });
             console.log(response.data.message);
             // Handle success, e.g., clear input field
             setText('');
