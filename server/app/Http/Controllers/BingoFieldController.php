@@ -68,7 +68,7 @@ class BingoFieldController extends Controller
 //        $bingoField->save();
 
         // Rückgabe der aktualisierten Daten
-        return response()->json($bingoField, 200);
+        return response()->json($field.' '.$value, 200);
     }
 
 
