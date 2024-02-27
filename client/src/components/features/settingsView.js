@@ -5,6 +5,7 @@ import {useAuth} from "../../services/AuthContext";
 import api from "../../services/api";
 import UpdateEmailModal from "../modal/updateEmailModal";
 import ResetPasswordModal from "../modal/updatePasswordModal";
+import AccountDeleteModal from "../modal/accountDeleteModal";
 
 const SettingsView = () => {
 
@@ -18,6 +19,7 @@ const SettingsView = () => {
     const navigate = useNavigate();
     const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
     const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
+    const [showAccountDeleteModal, setShowAccountDeleteModal] = useState(false);
 
     const openResetPasswordModal = () => {
         setShowResetPasswordModal(true);
@@ -25,6 +27,14 @@ const SettingsView = () => {
 
     const openChangeEmailModal = () => {
         setShowChangeEmailModal(true);
+    }
+
+    const openAccountDeleteModal = () => {
+        setShowAccountDeleteModal(true);
+    }
+
+    const closeAccountDeleteModal = () => {
+        setShowResetPasswordModal(false);
     }
 
     const closeResetPasswordModal = () => {
@@ -88,7 +98,9 @@ const SettingsView = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-8">
+                    <div
+                        onClick={openAccountDeleteModal}
+                        className="mt-8">
                         <h6 className="text-white text-center">Du möchtest deinen Account löschen?</h6>
                         <button className="bg-red-500 text-white w-full py-3 rounded-2xl uppercase text-xl mt-3">
                             🗑 Account löschen
@@ -99,6 +111,7 @@ const SettingsView = () => {
             </div>
             {showResetPasswordModal && <ResetPasswordModal onClose={closeResetPasswordModal} />}
             {showChangeEmailModal && <UpdateEmailModal onClose={closeChangeEmailModal} />}
+            {showAccountDeleteModal && <AccountDeleteModal onClose={closeAccountDeleteModal} />}
         </>
     )
 }
