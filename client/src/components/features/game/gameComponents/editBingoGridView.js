@@ -9,6 +9,7 @@ const BingoGridView = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState(null);
     const [selectedGossip, setSelectedGossip] = useState(null);
+    // const [selectedOption, setSelectedOption] = useState('');
     const [gossipData, setGossipData] = useState([]);
     const [loadedBingoFields, setLoadedBingoFields] = useState([]);
     const [gameId, setGameId] = useState(null);
@@ -79,8 +80,9 @@ const BingoGridView = () => {
 
     const handleGossipSelection = async (event) => {
         const selectedGossipId = event.target.value;
-        setSelectedGossip(selectedGossipId);
-        console.log(selectedGossip);
+        await setSelectedGossip(selectedGossipId);
+        console.log(selectedGossipId); // Hier wird der aktuelle ausgewählte Wert angezeigt
+        // console.log(selectedGossip);
     };
 
 
@@ -117,7 +119,7 @@ const BingoGridView = () => {
                             id="gossipSelect"
                             name="gossipSelect"
                             className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            defaultValue={gossipData.length > 0 ? gossipData[0].id : ""}
+                            defaultValue=""
                             onChange={handleGossipSelection}
                         >
                             {gossipData.map(gossip => (
