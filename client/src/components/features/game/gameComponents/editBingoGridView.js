@@ -107,14 +107,17 @@ const BingoGridView = () => {
 
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                <div className="bg-white p-6 rounded-3xl w-[80%]">
+                <div className="bg-white p-6 rounded-3xl w-[80%] relative">
+                    <div className="absolute right-3 top-3" onClick={closeModal}>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                    </div>
                     <h2 className="text-xl font-bold">Gossip auswählen</h2>
                     <div>
                         <select
                             id="gossipSelect"
                             name="gossipSelect"
                             className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            defaultValue=""
+                            defaultValue={gossipData.length > 0 ? gossipData[0].id : ""}
                             onChange={handleGossipSelection}
                         >
                             {gossipData.map(gossip => (
