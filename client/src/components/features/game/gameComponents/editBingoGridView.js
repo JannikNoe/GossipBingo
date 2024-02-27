@@ -87,6 +87,7 @@ const BingoGridView = () => {
 
 
     const handleSaveButton = async () => {
+        if (!selectedGossip) return
         await saveGossipSelection(selectedNumber, selectedGossip);
         await loadBingoField();
     };
@@ -120,8 +121,10 @@ const BingoGridView = () => {
                             name="gossipSelect"
                             className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             defaultValue=""
+                            value={selectedGossip}
                             onChange={handleGossipSelection}
                         >
+                            <option value={null}>Gossip Auswählen</option>
                             {gossipData.map(gossip => (
                                 <option key={gossip.id} value={gossip.id}>{gossip.title}</option>
                             ))}
@@ -150,82 +153,98 @@ const BingoGridView = () => {
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     <div className="grid grid-cols-4 gap-1.5">
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick(1)
+                            handleFieldClick(1);
+                            setSelectedGossip(loadedBingoFields[0]?.['field1'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field1}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(2)
+                            setSelectedGossip(loadedBingoFields[0]?.['field2'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field2}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(3)
+                            setSelectedGossip(loadedBingoFields[0]?.['field3'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field3}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(4)
+                            setSelectedGossip(loadedBingoFields[0]?.['field4'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field4}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(5)
+                            setSelectedGossip(loadedBingoFields[0]?.['field5'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field5}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(6)
+                            setSelectedGossip(loadedBingoFields[0]?.['field6'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field6}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(7)
+                            setSelectedGossip(loadedBingoFields[0]?.['field7'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field7}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(8)
+                            setSelectedGossip(loadedBingoFields[0]?.['field8'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field8}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(9)
+                            setSelectedGossip(loadedBingoFields[0]?.['field9'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field9}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(10)
+                            setSelectedGossip(loadedBingoFields[0]?.['field10'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field10}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(11)
+                            setSelectedGossip(loadedBingoFields[0]?.['field11'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field11}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(12)
+                            setSelectedGossip(loadedBingoFields[0]?.['field12'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field12}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(13)
+                            setSelectedGossip(loadedBingoFields[0]?.['field13'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field13}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(14)
+                            setSelectedGossip(loadedBingoFields[0]?.['field14'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field14}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(15)
+                            setSelectedGossip(loadedBingoFields[0]?.['field15']?loadedBingoFields[0]?.['field15']:null);
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field15}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
                             handleFieldClick(16)
+                            setSelectedGossip(loadedBingoFields[0]?.['field16'])
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field16}</span>
                         </div>
