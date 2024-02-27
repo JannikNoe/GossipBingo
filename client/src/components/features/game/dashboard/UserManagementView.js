@@ -1,26 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GameHeader from "../../../layout/GameHeaderView";
-import DashboardView from "./dashboardView";
-import profileImage from "../../../../images/profileImage.jpg"
 import {Link} from "react-router-dom";
+import api from "../../../../services/api";
 
-const userData = [
-    {
-        profileImg:profileImage,
-        email:'jannik.noe@gmail.com',
-        name:'Jannik',
-    },
-]
 
 const UserManagement = () => {
 
+    const [userData, setUserData] = useState([]);
     const [expandedBoxes, setExpandedBoxes] = useState({});
+    const [deletedUserId, setDeletedUserId] = useState(null);
 
     const toggleBox = (id) => {
         setExpandedBoxes((prevState) => ({
             ...prevState,
             [id]: !prevState[id],
         }));
+    };
+
+    useEffect(() => {
+        // Funktion zum Laden der Nutzerdaten aufrufen, wenn die Komponente montiert wird
+        loadUsers();
+    }, []);
+
+    const loadUsers = async () => {
+        try {
+            const response = await api.get('http://127.0.0.1:8000/api/users');
+            setUserData(response.data);
+            console.log(response.data)
+        } catch (error) {
+            console.error('Fehler beim Laden der Nutzer:', error);
+        }
+    };
+
+    const handleDeleteUser = async (userId) => {
+        try {
+            const response = await api.delete(`http://127.0.0.1:8000/api/user/delete/${userId}`);
+            console.log(response.data);
+            // Nutzer aus der Benutzerliste filtern und aktualisierte Liste setzen
+            setUserData(prevState => prevState.filter(user => user.id !== userId));
+            setDeletedUserId(userId);
+        } catch (error) {
+            console.error('Fehler beim Löschen des Benutzers:', error);
+        }
     };
 
     return (
@@ -42,21 +63,26 @@ const UserManagement = () => {
                             <input type="text" placeholder="Suche nach Nutzern…" className="w-full"/>
                         </div>
                         <div className="">
-                            {userData.map((item) => (
+                            {userData.map((user, index) => (
                                 <div
-                                    key={item.id}
+                                    key={index}
                                     className="bg-white py-3 px-5 rounded-3xl my-2"
-                                    onClick={() => toggleBox(item.id)}
+                                    onClick={() => toggleBox(index)}
                                 >
                                     <div className="flex gap-x-3 items-center">
-                                        <img src={item.profileImg} className="w-14 h-14 rounded-full"/>
-                                        <h6 className={`text-md ${expandedBoxes[item.id] ? 'hidden' : 'line-clamp-2'}`}>{item.email}</h6>
+                                        <h6 className={`text-md ${expandedBoxes[index] ? 'hidden' : 'line-clamp-2'}`}>{user.email}</h6>
                                     </div>
-                                    {expandedBoxes[item.id] && (
+                                    {expandedBoxes[index] && (
                                         <div className="text-left mt-4 mb-2">
-                                            <h6 className="text-lg">{item.email}</h6>
-                                            <h6 className="text-lg">{item.name}</h6>
-                                            <button className="bg-red-500 text-white w-full py-3 rounded-xl uppercase text-xl mt-3">
+                                            <h6 className="text-lg">{user.email}</h6>
+                                            <h6 className="text-lg">{user.name}</h6>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Stoppe das Bubbling, um das toggleBox nicht auszulösen
+                                                    handleDeleteUser(user.id);
+                                                }}
+                                                className="bg-red-500 text-white w-full py-3 rounded-xl uppercase text-xl mt-3"
+                                            >
                                                 🗑 Nutzer löschen
                                             </button>
                                         </div>
@@ -65,6 +91,11 @@ const UserManagement = () => {
                             ))}
                         </div>
                     </div>
+                    {deletedUserId && (
+                        <div className="mt-4 text-center text-green-500">
+                            Nutzer wurde erfolgreich gelöscht.
+                        </div>
+                    )}
                     <Link to="/dashboard">
                         <div className="col-span-2 uppercase w-full rounded-3xl px-3 py-4 text-md font-semibold shadow-sm bg-bgGrayPrimary text-center mt-4">
                             <h4 className="uppercase font-medium text-xl text-DarkGrayPrimary">Zurück zum Dashboard</h4>

@@ -157,6 +157,11 @@ const DashboardView = () => {
                             <h4 className="uppercase font-medium text-xl text-DarkGrayPrimary">Nutzerverwaltung Öffnen</h4>
                         </div>
                     </Link>
+                    <Link to="/gameoverview">
+                        <div className="col-span-2 uppercase w-full rounded-3xl px-3 py-4 text-md text-white font-semibold shadow-sm text-center mt-4">
+                            <h4 className="uppercase font-medium text-xl text-DarkGrayPrimary">Zurück zur Übersicht</h4>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>
