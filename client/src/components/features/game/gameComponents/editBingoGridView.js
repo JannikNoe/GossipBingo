@@ -60,8 +60,13 @@ const BingoGridView = () => {
             const response = await api.get(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}`);
             console.log(response.data)
             const abc = []
-            abc.push(response.data)
+            const datas = {}
+            for (let i = 1; i <= 16; i++) {
+                datas['field'+i] = response.data['field'+i]
+            }
+            abc.push(datas)
             setLoadedBingoFields(abc);
+            console.log(abc)
         } catch (error) {
             console.error('Error loading bingo field:', error);
         }
@@ -125,7 +130,7 @@ const BingoGridView = () => {
                             onChange={handleGossipSelection}
                         >
                             <option value={null}>Gossip Auswählen</option>
-                            {gossipData.map(gossip => (
+                            {gossipData.filter(({id}) => !Object.values(loadedBingoFields[0]).includes(id)).map(gossip => (
                                 <option key={gossip.id} value={gossip.id}>{gossip.title}</option>
                             ))}
                         </select>
