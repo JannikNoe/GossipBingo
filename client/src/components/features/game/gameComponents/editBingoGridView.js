@@ -68,7 +68,7 @@ const BingoGridView = () => {
 
     const saveGossipSelection = async (fieldId, selectedGossipId) => {
         try {
-            const response = await api.put(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}`, { selectedGossipId: selectedGossipId, fieldId: fieldId});
+            const response = await api.get(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}/${selectedGossipId}/${fieldId}`);
 
             console.log('Gossip selection saved:', response.data);
         } catch (error) {
@@ -79,6 +79,7 @@ const BingoGridView = () => {
     const handleGossipSelection = async (event) => {
         const selectedGossipId = event.target.value;
         setSelectedGossip(selectedGossipId);
+        console.log(selectedGossip);
     };
 
 
@@ -143,82 +144,82 @@ const BingoGridView = () => {
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     <div className="grid grid-cols-4 gap-1.5">
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field1')
+                            handleFieldClick(1)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field1}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field2')
+                            handleFieldClick(2)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field2}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field3')
+                            handleFieldClick(3)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field3}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field4')
+                            handleFieldClick(4)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field4}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field5')
+                            handleFieldClick(5)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field5}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field6')
+                            handleFieldClick(6)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field6}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field7')
+                            handleFieldClick(7)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field7}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field8')
+                            handleFieldClick(8)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field8}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field9')
+                            handleFieldClick(9)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field9}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field10')
+                            handleFieldClick(10)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field10}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field11')
+                            handleFieldClick(11)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field11}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field12')
+                            handleFieldClick(12)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field12}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field13')
+                            handleFieldClick(13)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field13}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field14')
+                            handleFieldClick(14)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field14}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field15')
+                            handleFieldClick(15)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field15}</span>
                         </div>
                         <div className="bg-white rounded-lg relative" onClick={() => {
-                            handleFieldClick('field16')
+                            handleFieldClick(16)
                         }}>
                             <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field16}</span>
                         </div>

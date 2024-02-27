@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\BingoField;
 use App\Models\User;
 
@@ -36,8 +37,10 @@ class BingoFieldController extends Controller
         return response()->json($bingoField, 200);
     }
 
-    public function updateBingoFields(Request $request, $gameId, $userId)
+    public function updateBingoFields($gameId, $userId, $selectedGossipId, $fieldId)
     {
+
+        dd('Hey');
         // Überprüfe, ob ein Eintrag mit den angegebenen game_id und user_id existiert
         $bingoField = BingoField::where('game_id', $gameId)
             ->where('user_id', $userId)
@@ -47,10 +50,9 @@ class BingoFieldController extends Controller
             // Wenn kein Eintrag gefunden wurde, kannst du hier entsprechend reagieren
             return response()->json(['message' => 'Eintrag nicht gefunden'], 404);
         }
-
         // Überprüfe, ob die Anfrage das Feld und den Wert enthält
-        $field = $request->input('fieldId');
-        $value = $request->input('selectedGossipId');
+        $field = $fieldId;
+        $value = $selectedGossipId;
 
         if (!$field || !$value) {
             // Wenn die erforderlichen Daten nicht vorhanden sind, gib einen Fehler zurück
