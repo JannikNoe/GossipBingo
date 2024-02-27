@@ -4,6 +4,7 @@ import GameHeader from "../layout/GameHeaderView";
 import {useAuth} from "../../services/AuthContext";
 import api from "../../services/api";
 import UpdateEmailModal from "../modal/updateEmailModal";
+import ResetPasswordModal from "../modal/updatePasswordModal";
 
 const SettingsView = () => {
 
@@ -63,18 +64,21 @@ const SettingsView = () => {
                             </div>
                         </div>
                     </div>
-                    <Link to="">
-                        <div className="bg-white text-black rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
-                                <div className="">
-                                    <h6 className="uppercase text-sm pb-1.5">Ich möchte meine</h6>
-                                    <h4 className="uppercase text-3xl font-medium">Passwort ändern</h4>
-                                </div>
+
+                    <div
+                        onClick={openResetPasswordModal}
+                        className="bg-white text-black rounded-3xl py-6 px-6 mt-4 cursor-pointer"
+                    >
+                        <div className="flex justify-between items-center">
+                            <div className="">
+                                <h6 className="uppercase text-sm pb-1.5">Ich möchte meine</h6>
+                                <h4 className="uppercase text-3xl font-medium">Passwort ändern</h4>
                             </div>
                         </div>
-                    </Link>
+                    </div>
+
                     <div
-                        className="bg-white text-black rounded-3xl py-6 px-6 mt-4"
+                        className="bg-white text-black rounded-3xl py-6 px-6 mt-4 cursor-pointer"
                         onClick={handleLogout}
                     >
                         <div className="flex justify-between items-center">
@@ -93,7 +97,7 @@ const SettingsView = () => {
                     </div>
                 </div>
             </div>
-            {/*{showResetPasswordModal && <ResetPasswordModal onClose={closeResetPasswordModal} />}*/}
+            {showResetPasswordModal && <ResetPasswordModal onClose={closeResetPasswordModal} />}
             {showChangeEmailModal && <UpdateEmailModal onClose={closeChangeEmailModal} />}
         </>
     )

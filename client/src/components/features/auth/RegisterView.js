@@ -3,6 +3,7 @@ import PublicHeader from "../../layout/PublicHeaderView";
 import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import GameHeader from "../../layout/GameHeaderView";
+import api from "../../../services/api";
 
 const Register = () => {
 
@@ -27,7 +28,7 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
+            const response = await api.post('http://127.0.0.1:8000/api/register', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
