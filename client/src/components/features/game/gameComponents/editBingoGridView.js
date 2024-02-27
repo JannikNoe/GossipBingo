@@ -68,7 +68,7 @@ const BingoGridView = () => {
 
     const saveGossipSelection = async (fieldId, selectedGossipId) => {
         try {
-            const response = await api.get(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}/${selectedGossipId}/${fieldId}`);
+            const response = await api.put(`http://127.0.0.1:8000/api/update-bingo-field/${gameId}/${userId}/${selectedGossipId}/${fieldId}`);
 
             console.log('Gossip selection saved:', response.data);
         } catch (error) {
