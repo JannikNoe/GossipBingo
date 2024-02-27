@@ -58,17 +58,17 @@ class BingoFieldController extends Controller
             return response()->json(['message' => 'Feld und Wert sind erforderlich'], 400);
         }
 
-//        // Stelle sicher, dass das Feld gültig ist
-//        if (!in_array($field, ['field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15', 'field16'])) {
-//            return response()->json(['message' => 'Ungültiges Feld'], 400);
-//        }
+        // Stelle sicher, dass das Feld gültig ist
+        if (!in_array($field, ['field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15', 'field16'])) {
+            return response()->json(['message' => 'Ungültiges Feld'], 400);
+        }
 
-//        // Aktualisiere nur das spezifizierte Feld
-//        $bingoField->$field = $value;
-//        $bingoField->save();
+        // Aktualisiere nur das spezifizierte Feld
+        $bingoField->$field = $value;
+        $bingoField->save();
 
         // Rückgabe der aktualisierten Daten
-        return response()->json($field.' '.$value, 200);
+        return response()->json($bingoField, 200);
     }
 
 
