@@ -34,10 +34,10 @@ class BingoField extends Model
         'field16',
     ];
     // Definieren Sie die Beziehung zum Benutzer
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class, 'user_id');
+//    }
     public $timestamps = true;
 
 

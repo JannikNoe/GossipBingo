@@ -11,6 +11,7 @@ class BingoFieldController extends Controller
     {
         // Suche den Eintrag in der "bingo_fields" Tabelle
         $bingoField = BingoField::where('game_id', $gameId)
+
             ->where('user_id', $userId)
             ->first();
 
@@ -20,6 +21,12 @@ class BingoFieldController extends Controller
             $bingoField->game_id = $gameId;
             $bingoField->user_id = $userId;
             // Hier kannst du weitere Felder setzen, falls benötigt
+
+            // Fülle die Felder mit Platzhaltern
+//            for ($i = 1; $i <= 16; $i++) {
+//                $fieldName = 'field' . $i;
+//                $bingoField->$fieldName = 0; // Platzhalterwert
+//            }
 
             // Speichere den neuen Eintrag in der Datenbank
             $bingoField->save();
