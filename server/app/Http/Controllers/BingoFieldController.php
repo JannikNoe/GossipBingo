@@ -48,10 +48,22 @@ class BingoFieldController extends Controller
             return response()->json(['message' => 'Eintrag nicht gefunden'], 404);
         }
 
-        // Aktualisiere die Felder 'field1' bis 'field16' mit den Daten aus der Anfrage
-        $bingoField->fill($request->only('field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15', 'field16'));
+        // Überprüfe, ob die Anfrage das Feld und den Wert enthält
+        $field = $request->input('fieldId');
+        $value = $request->input('selectedGossipId');
 
-        // Speichere die aktualisierten Daten in der Datenbank
+        if (!$field || !$value) {
+            // Wenn die erforderlichen Daten nicht vorhanden sind, gib einen Fehler zurück
+            return response()->json(['message' => 'Feld und Wert sind erforderlich'], 400);
+        }
+
+        // Stelle sicher, dass das Feld gültig ist
+        if (!in_array($field, ['field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15', 'field16'])) {
+            return response()->json(['message' => 'Ungültiges Feld'], 400);
+        }
+
+        // Aktualisiere nur das spezifizierte Feld
+        $bingoField->$field = $value;
         $bingoField->save();
 
         // Rückgabe der aktualisierten Daten
