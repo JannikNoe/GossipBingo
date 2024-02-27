@@ -1,14 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import GameHeader from "../layout/GameHeaderView";
 import {useAuth} from "../../services/AuthContext";
-import axios from "axios";
 import api from "../../services/api";
+import UpdateEmailModal from "../modal/updateEmailModal";
 
 const SettingsView = () => {
 
-    // const { isLoggedIn, logout } = useAuth();
+    useEffect(() => {
+        if (!localStorage.getItem('token')){
+            navigate('/login')
+        }
+    }, []);
+
+
     const navigate = useNavigate();
+    const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
+    const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
+
+    const openResetPasswordModal = () => {
+        setShowResetPasswordModal(true);
+    }
+
+    const openChangeEmailModal = () => {
+        setShowChangeEmailModal(true);
+    }
+
+    const closeResetPasswordModal = () => {
+        setShowResetPasswordModal(false);
+    }
+
+    const closeChangeEmailModal = () => {
+        setShowChangeEmailModal(false);
+    }
+
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -22,23 +47,22 @@ const SettingsView = () => {
     }
 
 
-
     return (
         <>
             <div className="bg-bgDarkGrayPrimary h-screen ">
                 <GameHeader />
                 <div className="max-w-xl m-auto px-6 pb-14 pt-8">
                     <h2 className="uppercase text-4xl font-semibold text-white">Lästige Einstellungen</h2>
-                    <Link to="">
-                        <div className="bg-white text-black rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
-                                <div className="">
-                                    <h6 className="uppercase text-sm pb-1.5">Ich möchte meine</h6>
-                                    <h4 className="uppercase text-3xl font-medium">E-Mail ändern</h4>
-                                </div>
+                    <div
+                        onClick={openChangeEmailModal}
+                        className="bg-white text-black rounded-3xl py-6 px-6 mt-4 cursor-pointer">
+                        <div className="flex justify-between items-center">
+                            <div className="">
+                                <h6 className="uppercase text-sm pb-1.5">Ich möchte meine</h6>
+                                <h4 className="uppercase text-3xl font-medium">E-Mail ändern</h4>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                     <Link to="">
                         <div className="bg-white text-black rounded-3xl py-6 px-6 mt-4">
                             <div className="flex justify-between items-center">
@@ -69,6 +93,8 @@ const SettingsView = () => {
                     </div>
                 </div>
             </div>
+            {/*{showResetPasswordModal && <ResetPasswordModal onClose={closeResetPasswordModal} />}*/}
+            {showChangeEmailModal && <UpdateEmailModal onClose={closeChangeEmailModal} />}
         </>
     )
 }

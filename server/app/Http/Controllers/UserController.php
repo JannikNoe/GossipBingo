@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         // Validiere die Eingabe, z.B., dass die neue Email-Adresse gültig ist
         $request->validate([
-            'new_email' => 'required|email|unique:users,email',
+            'new_email' => 'required|email|unique:user,email',
         ]);
 
         // Suche den Nutzer anhand seiner "id"
