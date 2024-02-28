@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameWinner;
 use Illuminate\Http\Request;
 use App\Models\BingoField;
 use App\Models\User;
