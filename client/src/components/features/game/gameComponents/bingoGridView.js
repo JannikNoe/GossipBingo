@@ -128,34 +128,40 @@ const BingoGridView = () => {
         );
     };
 
+    {/*{gossipData && (*/}
+    {/*    <div className="flex gap-x-1 items-center">*/}
+    {/*        <h6 className="font-semibold pb-1">Status:</h6>*/}
+    {/*        {gossipData.find(gossip => gossip.id === selectedGossip) ? (*/}
+    {/*            <span className="bg-red-300 py-1 px-2 rounded-lg">Offen</span>*/}
+    {/*        ) : (*/}
+    {/*            <span className="bg-green-300 py-1 px-2 rounded-lg">Bingo</span>*/}
+    {/*        )}*/}
+    {/*    </div>*/}
+    {/*)}*/}
+
     return (
         <div className="bg-bgGamePrimary h-screen">
             <GameHeader />
             <div className="max-w-xl m-auto px-6 pb-14">
                 <h3 className="uppercase text-4xl font-semibold text-white pt-8">Dein Bingofeld</h3>
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
-                    {loading ? ( // Überprüfen, ob geladen wird
+                    {loading ? (
                         <div className="w-full flex justify-center bg-white py-3 px-5 rounded-3xl my-2">
                             <LottieLoader/>
-                        </div> // Placeholder-Loader
+                        </div>
                     ) : (
                         <div className="grid grid-cols-4 gap-1.5">
-                            {/*{gossipData && (*/}
-                            {/*    <div className="flex gap-x-1 items-center">*/}
-                            {/*        <h6 className="font-semibold pb-1">Status:</h6>*/}
-                            {/*        {gossipData.find(gossip => gossip.id === selectedGossip) ? (*/}
-                            {/*            <span className="bg-red-300 py-1 px-2 rounded-lg">Offen</span>*/}
-                            {/*        ) : (*/}
-                            {/*            <span className="bg-green-300 py-1 px-2 rounded-lg">Bingo</span>*/}
-                            {/*        )}*/}
-                            {/*    </div>*/}
-                            {/*)}*/}
+
                             <div className="bg-white rounded-lg relative" onClick={() => {
                                 handleFieldClick(1);
-                                setSelectedGossip(loadedBingoFields[0]?.['field1'])
-                            }}>
+                                setSelectedGossip(loadedBingoFields[0]?.['field1']);
+                                }}>
                                 <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field1}</span>
-                                <span className="absolute z-1 top-1 left-1 opacity-20 text-6xl" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>👍</span>
+                                {gossipData.find(gossip => gossip.id === selectedGossip)?.status === 1 && (
+                                    <span className="absolute z-1 top-1 left-1 opacity-20 text-6xl" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                                        👍
+                                    </span>
+                                )}
                             </div>
 
                             <div className="bg-white rounded-lg relative" onClick={() => {
