@@ -15,7 +15,6 @@ const CheckedScenariosAccordion = () => {
         loadGossipData();
     }, []);
 
-
     const loadGossipData = async () => {
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
@@ -24,7 +23,6 @@ const CheckedScenariosAccordion = () => {
                 ...gossip,
                 formattedTimestamp: formatTimestamp(gossip.updated_at) // Hinzufügen des formatierten Timestamps zu jedem Gossip-Eintrag
             })));
-            console.log(response.data.gossip)
         } catch (error) {
             console.error('Error:', error);
         }
@@ -58,7 +56,7 @@ const CheckedScenariosAccordion = () => {
                                 <svg className="w-[20px] h-[20px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
                                     <g id="Gruppe_44" data-name="Gruppe 44" transform="translate(-52 -449)">
                                         <circle id="Ellipse_22" data-name="Ellipse 22" cx="11" cy="11" r="11" transform="translate(52 449)"/>
-                                        <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-95.495 116.755)" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
+                                        <path id="done_FILL0_wght400_GRAD0_opsz48" d="M157.093,346.49,154,343.4l.594-.594,2.5,2.5,5.3-5.3.594.594Z" transform="translate(-95.495 116.755)" fill="#fff" stroke="#fff" strokeLinejoin="round" stroke-width="1"/>
                                     </g>
                                 </svg>
                                 <div className="bg-black rounded-full py-1 px-3">

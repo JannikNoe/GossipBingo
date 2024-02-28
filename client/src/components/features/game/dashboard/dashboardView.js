@@ -13,7 +13,6 @@ const gameStatusDescriptions = {
 };
 
 
-
 const DashboardView = () => {
 
     const navigate = useNavigate();

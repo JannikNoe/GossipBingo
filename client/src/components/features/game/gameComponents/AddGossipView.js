@@ -99,7 +99,7 @@ const AddGossipView = () => {
                                             <g id="Gruppe_46" data-name="Gruppe 46" transform="translate(294 208)">
                                                 <rect id="Rechteck_8" data-name="Rechteck 8" width="38" height="38" rx="19" transform="translate(18 21)" fill="#fff"/>
                                             </g>
-                                            <path id="send_FILL1_wght400_GRAD0_opsz24" d="M120-788.5v-4.314l5.751-1.438L120-795.686V-800l13.66,5.751Z" transform="translate(206.908 1042.249)" fill="#202020" stroke="#202020" stroke-linejoin="round" stroke-width="1"/>
+                                            <path id="send_FILL1_wght400_GRAD0_opsz24" d="M120-788.5v-4.314l5.751-1.438L120-795.686V-800l13.66,5.751Z" transform="translate(206.908 1042.249)" fill="#202020" stroke="#202020" strokeLinejoin="round" stroke-width="1"/>
                                         </g>
                                     </svg>
                                 </button>

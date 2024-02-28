@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
+import api from "../../../services/api";
 import GameHeader from "../../layout/GameHeaderView";
 import WaitingGif from '../../../images/gifs/giphy-waiting.gif';
 import UncheckedScenariosAccordion from "./gameComponents/UncheckedScenariosAccordionView";
 import CheckedScenariosAccordion from "./gameComponents/CheckedScenariosAccordionView";
-import api from "../../../services/api";
 
 
 const GameView = () => {
@@ -26,13 +25,9 @@ const GameView = () => {
 
     const checkIfGameStarted = async () => {
         try {
-            // const storedValue = localStorage.getItem('gameId');
-            // console.log(storedValue);
             const response = await api.get('http://127.0.0.1:8000/api/games/latest');
-            console.log(response.data)
             localStorage.setItem('currentGameId', response.data.game.id)
             setGameStarted(response.data.game ? response.data.game.status : 0);
-            console.log(response.data.game)
             return true; // Spiel ist gestartet, wenn der Status nicht 0 ist
         } catch (error) {
             console.error('Fehler beim Abrufen des Spielstatus', error);
@@ -113,19 +108,6 @@ const GameView = () => {
                                         </div>
                                     )}
                                 </div>
-
-                                {/*<div*/}
-                                {/*    className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}*/}
-                                {/*>*/}
-                                {/*    <UncheckedScenariosAccordion></UncheckedScenariosAccordion>*/}
-                                {/*</div>*/}
-
-
-                                {/*<div*/}
-                                {/*    className={`transition-all duration-500 ${activeTab === 'pastGossip' ? 'opacity-100' : 'opacity-0'}`}*/}
-                                {/*>*/}
-                                {/*    <CheckedScenariosAccordion></CheckedScenariosAccordion>*/}
-                                {/*</div>*/}
                             </div>
                         </div>
                     ):(

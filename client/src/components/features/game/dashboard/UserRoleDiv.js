@@ -9,9 +9,6 @@ function UserRoleDiv() {
     const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        // Annahme: Die Benutzer-ID ist in irgendeiner Form verfügbar, z.B. in einem globalen Zustand oder als prop übergeben
-
-        // Stelle sicher, dass eine gültige Benutzer-ID vorhanden ist, bevor die API-Anfrage gesendet wird
         if (userId) {
             api.get(`http://127.0.0.1:8000/api/user-role/${userId}`)
                 .then(response => {

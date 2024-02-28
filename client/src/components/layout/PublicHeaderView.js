@@ -42,7 +42,7 @@ const PublicHeader = () => {
                         </div>
                         <div className="bg-white rounded-full  p-2.5 " onClick={toggleMobileNav}>
                             <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.132 14.742">
-                                <path id="menu_FILL0_wght400_GRAD0_opsz48" d="M6,25.742V24.024H23.132v1.718ZM6,19.73V18.012H23.132V19.73Zm0-6.012V12H23.132v1.718Z" transform="translate(-5.5 -11.5)" fill="#202020" stroke="#202020" stroke-linejoin="round" stroke-width="1"/>
+                                <path id="menu_FILL0_wght400_GRAD0_opsz48" d="M6,25.742V24.024H23.132v1.718ZM6,19.73V18.012H23.132V19.73Zm0-6.012V12H23.132v1.718Z" transform="translate(-5.5 -11.5)" fill="#202020" stroke="#202020" strokeLinejoin="round" stroke-width="1"/>
                             </svg>
                         </div>
                     </div>
