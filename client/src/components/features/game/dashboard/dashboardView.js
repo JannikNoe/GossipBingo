@@ -59,7 +59,6 @@ const DashboardView = () => {
     const getLatestGame = async () => {
         try {
             const response = await api.get('http://127.0.0.1:8000/api/games/latest');
-            console.log(response);
             if (response.data.game) {
                 localStorage.setItem('currentGameId', response.data.game.id);
                 localStorage.setItem('currentGameStatus', response.data.game.status);
