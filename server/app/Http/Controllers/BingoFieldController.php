@@ -87,46 +87,47 @@ class BingoFieldController extends Controller
                 $bingoField->field13, $bingoField->field14, $bingoField->field15, $bingoField->field16,
             ];
         })->unique()->values();
+        return response()->json(['message' => $gossipIds], 444);
 
-        $gossipStatuses = Gossip::whereIn('id', $gossipIds)->pluck('status', 'id');
-
-        $bingoCombinations = [
-            ['field1', 'field2', 'field3', 'field4'],
-            ['field5', 'field6', 'field7', 'field8'],
-            ['field9', 'field10', 'field11', 'field12'],
-            ['field13', 'field14', 'field15', 'field16'],
-            ['field1', 'field5', 'field9', 'field13'],
-            ['field2', 'field6', 'field10', 'field14'],
-            ['field3', 'field7', 'field11', 'field15'],
-            ['field4', 'field8', 'field12', 'field16'],
-            ['field1', 'field6', 'field11', 'field16'],
-            ['field4', 'field7', 'field10', 'field13'],
-        ];
-
-        foreach ($bingoFields as $bingoField) {
-            $isBingo = false;
-
-            foreach ($bingoCombinations as $combination) {
-                $combinationStatuses = collect($combination)->map(function ($fieldName) use ($bingoField, $gossipStatuses) {
-                    $gossipId = $bingoField->{$fieldName};
-                    return $gossipStatuses[$gossipId] ?? null;
-                });
-
-                if ($combinationStatuses->filter()->count() === 4 && $combinationStatuses->unique()->count() === 1 && $combinationStatuses->first() === 1) {
-                    $isBingo = true;
-                    break;
-                }
-            }
-
-            if ($isBingo) {
-                // Ihre Logik für den Fall, dass ein Bingo gefunden wurde
-                // ...
-                $user = 'test';
-                return response()->json(['winner' => $user], 200);
-            }
-        }
-
-        return response()->json(['message' => 'Kein Bingo gefunden'], 404);
+//        $gossipStatuses = Gossip::whereIn('id', $gossipIds)->pluck('status', 'id');
+//
+//        $bingoCombinations = [
+//            ['field1', 'field2', 'field3', 'field4'],
+//            ['field5', 'field6', 'field7', 'field8'],
+//            ['field9', 'field10', 'field11', 'field12'],
+//            ['field13', 'field14', 'field15', 'field16'],
+//            ['field1', 'field5', 'field9', 'field13'],
+//            ['field2', 'field6', 'field10', 'field14'],
+//            ['field3', 'field7', 'field11', 'field15'],
+//            ['field4', 'field8', 'field12', 'field16'],
+//            ['field1', 'field6', 'field11', 'field16'],
+//            ['field4', 'field7', 'field10', 'field13'],
+//        ];
+//
+//        foreach ($bingoFields as $bingoField) {
+//            $isBingo = false;
+//
+//            foreach ($bingoCombinations as $combination) {
+//                $combinationStatuses = collect($combination)->map(function ($fieldName) use ($bingoField, $gossipStatuses) {
+//                    $gossipId = $bingoField->{$fieldName};
+//                    return $gossipStatuses[$gossipId] ?? null;
+//                });
+//
+//                if ($combinationStatuses->filter()->count() === 4 && $combinationStatuses->unique()->count() === 1 && $combinationStatuses->first() === 1) {
+//                    $isBingo = true;
+//                    break;
+//                }
+//            }
+//
+//            if ($isBingo) {
+//                // Ihre Logik für den Fall, dass ein Bingo gefunden wurde
+//                // ...
+//                $user = 'test';
+//                return response()->json(['winner' => $user], 200);
+//            }
+//        }
+//
+//        return response()->json(['message' => 'Kein Bingo gefunden'], 404);
     }
 
 //    public function checkBingo($gameId)
