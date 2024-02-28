@@ -121,9 +121,15 @@ class BingoFieldController extends Controller
             }
 
             if ($isBingo) {
-                // Ihre Logik für den Fall, dass ein Bingo gefunden wurde
-                // ...
-                $user = 'test';
+                // Holen Sie den Nutzer aus der users Tabelle, der der user_id in bingo_fields entspricht
+                $user = User::find($bingoField->user_id);
+
+                if (!$user) {
+                    // Falls kein Nutzer gefunden wurde, geben Sie eine Fehlermeldung zurück
+                    return response()->json(['message' => 'Nutzer nicht gefunden'], 404);
+                }
+
+                // Geben Sie den Nutzer als Bingo-Gewinner zurück
                 return response()->json(['winner' => $user], 200);
             }
         }
