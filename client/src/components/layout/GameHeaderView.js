@@ -18,7 +18,7 @@ const GameHeader = () => {
     return (
         <header>
 
-            <div className="block md:hidden relative pt-20 z-[99]">
+            <div className="block relative pt-20 z-[99]">
                 <div className="absolute top-6 z-10 flex items-center justify-between w-full px-6 ">
                     <div onClick={handleBackButtonClick} className="bg-white rounded-full p-2.5">
                         <svg className="w-[22px] h-[22px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.173 15.83">

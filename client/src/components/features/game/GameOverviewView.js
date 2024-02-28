@@ -23,10 +23,10 @@ const GameOverview = () => {
     }, []);
 
     return (
-        <div className="bg-bgDarkGrayPrimary">
+        <div className="bg-bgDarkGrayPrimary h-screen">
             <GameHeader />
-            <div className="max-w-xl m-auto px-6 pb-14">
-                <div className="bg-white rounded-3xl relative p-5 mt-8">
+            <div className="max-w-xl m-auto px-6 pb-14 bg-bgDarkGrayPrimary  md:pt-10">
+                <div className="bg-white rounded-3xl relative p-5 mt-8 md:mt-0">
                     <h3 className="uppercase text-2xl font-semibold">Spiel Beitreten</h3>
                     {requirementList.map(requirement => (
                         <div key={requirement.id} className="flex gap-x-2 mt-3">
