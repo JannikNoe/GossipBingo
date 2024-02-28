@@ -146,7 +146,7 @@ class BingoFieldController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Kein Bingo gefunden'], 404);
+        return response()->json(['message' => 'Kein Bingo gefunden'], 201);
     }
 
 
