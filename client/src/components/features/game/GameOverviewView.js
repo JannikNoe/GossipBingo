@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import GameHeader from "../../layout/GameHeaderView";
 import UserRoleDiv from "./dashboard/UserRoleDiv";
+import api from "../../../services/api";
 
 const requirementList = [
     { id: 1, text: 'Alkohol steht bereit' },
@@ -14,13 +15,28 @@ const requirementList = [
 const GameOverview = () => {
 
     const navigate = useNavigate();
+    const [gameStatus, setGameStatus] = useState(localStorage.getItem('currentGameStatus'));
 
     useEffect(() => {
         if (!localStorage.getItem('token')){
             navigate('/login')
         }
+        getLatestGame();
 
     }, []);
+
+    const getLatestGame = async () => {
+        try {
+            const response = await api.get('http://127.0.0.1:8000/api/games/latest');
+            console.log(response);
+            if (response.data.game) {
+                localStorage.setItem('currentGameId', response.data.game.id);
+                localStorage.setItem('currentGameStatus', response.data.game.status);
+            }
+        } catch (error) {
+            console.error('Fehler beim Abrufen des neuesten Spiels', error);
+        }
+    };
 
     return (
         <div className="bg-bgDarkGrayPrimary h-screen">
@@ -61,9 +77,12 @@ const GameOverview = () => {
 
                 <div className="mt-10">
                     <h3 className="uppercase text-2xl font-semibold text-white">Weitere Möglichkeiten</h3>
-                    <Link to="">
-                        <div className="bg-bgYellowPrimary rounded-3xl py-6 px-6 mt-4">
-                            <div className="flex justify-between items-center">
+                    {/*<Link to="">*/}
+                        <div className="bg-bgYellowPrimary rounded-3xl mt-4 relative">
+                            <div className="glassmorp z-10 absolute h-full w-full !rounded-3xl flex justify-center items-center">
+                                <h3 className="text-xl font-semibold">Demnächst Verfügbar</h3>
+                            </div>
+                            <div className="flex justify-between items-center py-6 px-6">
                                 <div className="">
                                     <h6 className="uppercase text-sm pb-1.5">Dein eigenes</h6>
                                     <h4 className="uppercase text-3xl font-medium">Profil</h4>
@@ -78,7 +97,7 @@ const GameOverview = () => {
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    {/*</Link>*/}
 
                     <Link to="/settings">
                         <div className="bg-[#8F60F8] rounded-3xl py-6 px-6 mt-4">

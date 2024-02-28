@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import GameHeader from "../../../layout/GameHeaderView";
 import TrackingGifs from "./trackingGifs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import api from "../../../../services/api";
 import LottieLoader from "../../../base/loader";
 
@@ -11,7 +11,7 @@ const openRequests = [
 
 const GossipTrackerView = () => {
 
-    // toggle der verschiedenen offenen Anfragen Boxen
+    const navigate = useNavigate();
     const [gossipData, setGossipData] = useState([]);
     const [expandedBoxes, setExpandedBoxes] = useState({});
     const [gameId, setGameId] = useState(null);
@@ -20,6 +20,9 @@ const GossipTrackerView = () => {
     const [loading, setLoading] = useState(true); // Zustand für den Ladevorgang
 
     useEffect(() => {
+        if (!localStorage.getItem('token')){
+            navigate('/login')
+        }
         loadGossipData();
         getLatestGameId();
     }, []);

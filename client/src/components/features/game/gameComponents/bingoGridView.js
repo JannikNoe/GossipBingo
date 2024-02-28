@@ -63,7 +63,6 @@ const BingoGridView = () => {
         try {
             const gameId = localStorage.getItem('currentGameId');
             const response = await api.get(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}`);
-            console.log(response.data)
             const abc = []
             const datas = {}
             for (let i = 1; i <= 16; i++) {
@@ -71,7 +70,6 @@ const BingoGridView = () => {
             }
             abc.push(datas)
             setLoadedBingoFields(abc);
-            console.log(abc)
         } catch (error) {
             console.error('Error loading bingo field:', error);
         } finally {
@@ -127,17 +125,6 @@ const BingoGridView = () => {
             </div>
         );
     };
-
-    {/*{gossipData && (*/}
-    {/*    <div className="flex gap-x-1 items-center">*/}
-    {/*        <h6 className="font-semibold pb-1">Status:</h6>*/}
-    {/*        {gossipData.find(gossip => gossip.id === selectedGossip) ? (*/}
-    {/*            <span className="bg-red-300 py-1 px-2 rounded-lg">Offen</span>*/}
-    {/*        ) : (*/}
-    {/*            <span className="bg-green-300 py-1 px-2 rounded-lg">Bingo</span>*/}
-    {/*        )}*/}
-    {/*    </div>*/}
-    {/*)}*/}
 
     return (
         <div className="bg-bgGamePrimary h-screen">

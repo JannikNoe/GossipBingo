@@ -44,7 +44,6 @@ const BingoGridView = () => {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
             const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
-            console.log(response.data.gossip)
         } catch (error) {
             console.error('Error:', error);
         }
@@ -55,7 +54,6 @@ const BingoGridView = () => {
         try {
             const gameId = localStorage.getItem('currentGameId');
             const response = await api.get(`http://127.0.0.1:8000/api/bingo-fields/${gameId}/${userId}`);
-            console.log(response.data)
             const abc = []
             const datas = {}
             for (let i = 1; i <= 16; i++) {
@@ -74,8 +72,6 @@ const BingoGridView = () => {
         const field = 'field'+fieldId;
         try {
             const response = await api.put(`http://127.0.0.1:8000/api/update-bingo-field/${gameId}/${userId}/${selectedGossipId}/${field}`);
-
-            console.log('Gossip selection saved:', response.data);
         } catch (error) {
             console.error('Error saving gossip selection:', error);
         }
@@ -85,7 +81,6 @@ const BingoGridView = () => {
         const selectedGossipId = event.target.value;
         await setSelectedGossip(selectedGossipId);
         console.log(selectedGossipId); // Hier wird der aktuelle ausgewählte Wert angezeigt
-        // console.log(selectedGossip);
     };
 
 
@@ -118,7 +113,7 @@ const BingoGridView = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
                     </div>
                     <h2 className="text-xl font-bold">Gossip auswählen</h2>
-                    <div>
+                    <div className="my-6">
                         <select
                             id="gossipSelect"
                             name="gossipSelect"
@@ -133,11 +128,7 @@ const BingoGridView = () => {
                             ))}
                         </select>
                     </div>
-                    <hr className="my-3" />
-                    <p className="mt-2"><span className="font-semibold">Auswahl:</span><br/>
-                        {number.gossip}
-                    </p>
-                    <p className="mt-1">Bingo-Nummer: {number.number}</p>
+                    {/*<hr className="my-3" />*/}
                     <button
                         onClick={()=>{onClose(); handleSaveButton()}}
                         className="uppercase w-full rounded-2xl bg-bgDarkGrayPrimary px-3 py-3 text-md font-semibold text-white shadow-sm mt-4">
