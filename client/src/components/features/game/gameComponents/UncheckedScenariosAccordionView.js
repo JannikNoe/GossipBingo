@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import api from "../../../../services/api";
+import LottieLoader from "../../../base/loader";
 
 const UncheckedScenariosAccordion = () => {
 
@@ -50,8 +51,8 @@ const UncheckedScenariosAccordion = () => {
     return(
         <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
             {loading ? ( // Überprüfen, ob geladen wird
-                <div className="loader">
-                    Loading...
+                <div className="w-full flex justify-center bg-white py-3 px-5 rounded-3xl my-2">
+                    <LottieLoader/>
                 </div> // Placeholder-Loader
             ) : (
                 activeTab === 'openRequests' &&

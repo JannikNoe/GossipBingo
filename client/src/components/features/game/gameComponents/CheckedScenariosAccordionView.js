@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import axios from "axios";
 import api from "../../../../services/api";
+import LottieLoader from "../../../base/loader";
 
 
 const CheckedScenariosAccordion = () => {
@@ -10,12 +10,14 @@ const CheckedScenariosAccordion = () => {
     const [expandedBoxes, setExpandedBoxes] = useState({});
     const [gossipData, setGossipData] = useState([]);
     const [gameId, setGameId] = useState(null);
+    const [loading, setLoading] = useState(true); // Zustand für den Ladevorgang
 
     useEffect(() => {
         loadGossipData();
     }, []);
 
     const loadGossipData = async () => {
+        setLoading(true); // Ladezustand setzen
         try {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
             const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/1`); // Fetching gossip with status 0
@@ -25,6 +27,8 @@ const CheckedScenariosAccordion = () => {
             })));
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setLoading(false); // Ladezustand nach Abschluss des Ladevorgangs aufheben, unabhängig vom Erfolg oder Fehler
         }
     };
 
@@ -44,7 +48,12 @@ const CheckedScenariosAccordion = () => {
     return(
 
         <div className={`transition-all duration-500 ${activeTab === 'openRequests' ? 'opacity-100' : 'opacity-0'}`}>
-            {activeTab === 'openRequests' &&
+            {loading ? ( // Überprüfen, ob geladen wird
+                <div className="w-full flex justify-center bg-white py-3 px-5 rounded-3xl my-2">
+                    <LottieLoader/>
+                </div> // Placeholder-Loader
+            ) : (
+                activeTab === 'openRequests' &&
                 <>
                     {gossipData.map(gossip => (
                         <div
@@ -64,23 +73,11 @@ const CheckedScenariosAccordion = () => {
                                 </div>
                             </div>
                             <p className="text-sm pt-4">{gossip.title}</p>
-
-                            {/*{expandedBoxes[gossip.id] && (*/}
-                            {/*    <div>*/}
-                            {/*        <h6 className="text-sm pt-2">Bestätigt von</h6>*/}
-                            {/*        <div className="flex mt-1">*/}
-                            {/*            <img src="client/src/components/features/game/GameView" alt="" className="bg-black w-[30px] h-[30px] rounded-full border-white border-1" />*/}
-                            {/*            <div className="bg-black w-[30px] h-[30px] rounded-full border-white border-1 text-white text-xs font-semibold flex justify-center items-center">*/}
-                            {/*                <span className="block ">+4</span>*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*)}*/}
                         </div>
                     ))}
                     {/* Hier könnten weitere Elemente oder Kommentare stehen */}
                 </>
-            }
+                )}
         </div>
 
     )
