@@ -35,7 +35,6 @@ const GossipTrackerView = () => {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
             const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
-            // console.log(response.data.gossip)
         } catch (error) {
             console.error('Error:', error);
         } finally {

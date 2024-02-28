@@ -19,6 +19,8 @@ const BingoChecker = ({ gameId }) => {
             if (response.status === 200 && winner) {
                 setBingoWinner(winner);
                 setModalOpen(true);
+            } else {
+                setTimeout(() =>{checkBingo()}, 5000)
             }
         } catch (error) {
             console.error('Fehler beim Bingo-Check:', error);
@@ -30,11 +32,11 @@ const BingoChecker = ({ gameId }) => {
         try {
             const gameId = localStorage.getItem('currentGameId');
             const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/1`);
-            setGossipData(response.data.gossip); // Nur die Gossip-Daten speichern, ohne Timestamp-Kram
+            setGossipData(response.data.gossip);
         } catch (error) {
             console.error('Error:', error);
         } finally {
-            setLoading(false); // Ladezustand nach Abschluss des Ladevorgangs aufheben, unabhängig vom Erfolg oder Fehler
+            setLoading(false);
         }
     };
 
@@ -52,12 +54,6 @@ const BingoChecker = ({ gameId }) => {
     useEffect(() => {
         checkBingo();
         loadGossipData();
-        const intervalId = setInterval(() => {
-            checkBingo();
-        }, 5000);
-
-        // Aufräumen beim Komponentenabbau
-        return () => clearInterval(intervalId);
     }, []);
 
     const closeModal = () => {

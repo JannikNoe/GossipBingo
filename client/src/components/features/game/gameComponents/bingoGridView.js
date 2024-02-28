@@ -5,27 +5,6 @@ import api from "../../../../services/api";
 import LottieLoader from "../../../base/loader";
 
 
-
-// const bingoNumbers = [
-//     { field: '1', number: '1', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod', status: true },
-//     { field: '2', number: '2', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-//     { field: '3', number: '3', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '4', number: '4', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '5', number: '5', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '6', number: '6', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '7', number: '7', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '8', number: '8', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-//     { field: '9', number: '9', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '10', number: '32', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '11', number: '11', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '12', number: '25', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: true },
-//     { field: '13', number: '29', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '14', number: '31', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '15', number: '39', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-//     { field: '16', number: '16', gossip:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',status: false },
-// ];
-
-
 const BingoGridView = () => {
 
     useEffect(() => {
@@ -52,7 +31,6 @@ const BingoGridView = () => {
             const gameId = localStorage.getItem('currentGameId'); // Assuming you stored the game ID in local storage
             const response = await api.get(`http://127.0.0.1:8000/api/gossip/${gameId}/0`); // Fetching gossip with status 0
             setGossipData(response.data.gossip);
-            console.log(response.data.gossip)
         } catch (error) {
             console.error('Error:', error);
         }
@@ -134,113 +112,24 @@ const BingoGridView = () => {
                 <div className="bg-bgGrayPrimary rounded-3xl relative p-5 mt-8">
                     {loading ? (
                         <div className="w-full flex justify-center bg-white py-3 px-5 rounded-3xl my-2">
-                            <LottieLoader/>
+                            <LottieLoader />
                         </div>
                     ) : (
                         <div className="grid grid-cols-4 gap-1.5">
-
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(1);
-                                setSelectedGossip(loadedBingoFields[0]?.['field1']);
-                                }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field1}</span>
-                                {gossipData.find(gossip => gossip.id === selectedGossip)?.status === 1 && (
-                                    <span className="absolute z-1 top-1 left-1 opacity-20 text-6xl" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                                        👍
-                                    </span>
-                                )}
-                            </div>
-
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(2)
-                                setSelectedGossip(loadedBingoFields[0]?.['field2'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field2}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(3)
-                                setSelectedGossip(loadedBingoFields[0]?.['field3'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field3}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(4)
-                                setSelectedGossip(loadedBingoFields[0]?.['field4'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field4}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(5)
-                                setSelectedGossip(loadedBingoFields[0]?.['field5'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field5}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(6)
-                                setSelectedGossip(loadedBingoFields[0]?.['field6'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field6}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(7)
-                                setSelectedGossip(loadedBingoFields[0]?.['field7'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field7}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(8)
-                                setSelectedGossip(loadedBingoFields[0]?.['field8'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field8}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(9)
-                                setSelectedGossip(loadedBingoFields[0]?.['field9'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field9}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(10)
-                                setSelectedGossip(loadedBingoFields[0]?.['field10'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field10}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(11)
-                                setSelectedGossip(loadedBingoFields[0]?.['field11'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field11}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(12)
-                                setSelectedGossip(loadedBingoFields[0]?.['field12'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field12}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(13)
-                                setSelectedGossip(loadedBingoFields[0]?.['field13'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field13}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(14)
-                                setSelectedGossip(loadedBingoFields[0]?.['field14'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field14}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(15)
-                                setSelectedGossip(loadedBingoFields[0]?.['field15']?loadedBingoFields[0]?.['field15']:null);
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field15}</span>
-                            </div>
-                            <div className="bg-white rounded-lg relative" onClick={() => {
-                                handleFieldClick(16)
-                                setSelectedGossip(loadedBingoFields[0]?.['field16'])
-                            }}>
-                                <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.field16}</span>
-                            </div>
+                            {Array.from({ length: 16 }, (_, index) => {
+                                const fieldName = `field${index + 1}`;
+                                return (
+                                    <div key={index} className="bg-white rounded-lg relative" onClick={() => {
+                                        handleFieldClick(index + 1);
+                                        setSelectedGossip(loadedBingoFields[0]?.[fieldName]);
+                                    }}>
+                                        <span className="flex justify-center items-center h-[90px] text-black">{loadedBingoFields[0]?.[fieldName]}</span>
+                                        <span className="absolute z-1 top-1 left-1 opacity-20 text-6xl" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                                            {gossipData.find(gossip => gossip.id === loadedBingoFields[0]?.[fieldName]) ? '' : '👍'}
+                                        </span>
+                                    </div>
+                                );
+                            })}
                         </div>
                     )}
                 </div>
