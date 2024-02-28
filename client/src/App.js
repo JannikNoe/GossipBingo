@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // Router Testcode von GPT
-import React, { useEffect }from 'react';
+import React, { useEffect, useLocation }from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { AuthProvider } from './services/AuthContext';
 import Api from "./services/api";
@@ -22,7 +22,7 @@ import UserManagementView from "./components/features/game/dashboard/UserManagem
 import SettingsView from "./components/features/settingsView";
 import NotFound from "./components/NotFound";
 import { ModalProvider, ModalContext } from './context/ModalContext';
-import BingoChecker from "./components/layout/ModalWrapper";
+import BingoChecker from "./components/layout/bingoCheck";
 
 function App() {
     useEffect(() => {
@@ -35,6 +35,7 @@ function App() {
         <AuthProvider>
             <ModalProvider>
                 <Router>
+                    <BingoChecker /> {/* BingoChecker ohne gameId */}
                     <Routes>
                         <Route exact path="/" element={<LandingPage />} />
                         <Route path="/login" element={<LoginView />} />
@@ -54,12 +55,12 @@ function App() {
                         <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
-                    <BingoChecker /> {/* ModalWrapper innerhalb von Router */}
                 </Router>
             </ModalProvider>
         </AuthProvider>
     );
 }
+
 
 export default App;
 
