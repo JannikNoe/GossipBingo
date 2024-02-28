@@ -16,6 +16,31 @@ const gameStatusDescriptions = {
 
 const DashboardView = () => {
 
+    const navigate = useNavigate();
+    const [gameStatus, setGameStatus] = useState(localStorage.getItem('currentGameStatus'));
+    const username = localStorage.getItem('username')
+    const userId = localStorage.getItem('userId')
+
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        api.get(`http://127.0.0.1:8000/api/user-role/${userId}`)
+            .then(response => {
+                const userRoleValue = parseInt(response.data.role);
+                setUserRole(userRoleValue);
+            })
+            .catch(error => {
+                setError(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (userRole !== null && userRole !== 1) {
+            navigate('/gameoverview');
+        }
+    }, [userRole, navigate]);
+
     useEffect(() => {
         if (!localStorage.getItem('token')){
             navigate('/login')
@@ -30,10 +55,7 @@ const DashboardView = () => {
         };
     }, []);
 
-    const navigate = useNavigate();
-    const [gameStatus, setGameStatus] = useState(localStorage.getItem('currentGameStatus'));
-    const username = localStorage.getItem('username')
-    // ... Weitere Zustände
+
 
     const getLatestGame = async () => {
         try {
