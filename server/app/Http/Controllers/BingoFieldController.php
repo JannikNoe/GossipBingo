@@ -132,7 +132,6 @@ class BingoFieldController extends Controller
                     GameWinner::create([
                         'game_id' => $gameId,
                         'user_id' => $bingoField->user_id,
-                        'timestamp' => now(),
                     ]);
                 }
 
