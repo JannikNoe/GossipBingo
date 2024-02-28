@@ -63,7 +63,6 @@ const BingoGridView = () => {
             }
             abc.push(datas)
             setLoadedBingoFields(abc);
-            console.log(abc)
         } catch (error) {
             console.error('Error loading bingo field:', error);
         } finally {
