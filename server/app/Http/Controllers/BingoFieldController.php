@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BingoField;
 use App\Models\User;
+use App\Models\Gossip;
+
 
 class BingoFieldController extends Controller
 {
