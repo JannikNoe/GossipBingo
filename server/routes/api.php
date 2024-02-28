@@ -71,11 +71,11 @@ Route::middleware(['api','auth:sanctum'])->group(function () {
     // Prüfen ob es ein Bingo gibt
     Route::get('/bingo-check/{gameId}', [BingoFieldController::class, 'checkBingo']);
 
-    // Gib mir alle Gewinner
-    Route::get('/game-winners', [GameWinnerController::class, 'getGameWinnersWithDetails']);
-
-    // Gib mir die Gewinne anhand einer userId
-    Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
+//    // Gib mir alle Gewinner
+//    Route::get('/game-winners', [GameWinnerController::class, 'getGameWinnersWithDetails']);
+//
+//    // Gib mir die Gewinne anhand einer userId
+//    Route::get('/game-winners/user/{userId}', [GameWinnerController::class, 'showGameWinnersByUserId']);
 
     // Prüft die Rolle des Nutzers
     Route::get('/user-role/{userId}', [UserRoleController::class, 'getUserRole']);

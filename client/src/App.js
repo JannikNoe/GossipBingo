@@ -21,22 +21,20 @@ import DashboardView from "./components/features/game/dashboard/dashboardView.js
 import UserManagementView from "./components/features/game/dashboard/UserManagementView.js";
 import SettingsView from "./components/features/settingsView";
 import NotFound from "./components/NotFound";
-
 import { ModalProvider, ModalContext } from './context/ModalContext';
-import ModalWrapper from "./components/layout/ModalWrapper";
-import axios from "axios";
+import BingoChecker from "./components/layout/ModalWrapper";
 
 function App() {
     useEffect(() => {
         // Setze den Titel beim Laden der Komponente
         document.title = "GossipBingo";
+
     }, []); // Dieser Effekt wird nur einmal beim Laden der Komponente ausgeführt
 
     return (
         <AuthProvider>
             <ModalProvider>
                 <Router>
-                    <ModalWrapper /> {/* ModalWrapper innerhalb von Router */}
                     <Routes>
                         <Route exact path="/" element={<LandingPage />} />
                         <Route path="/login" element={<LoginView />} />
@@ -56,6 +54,7 @@ function App() {
                         <Route path="/dashboard/usermanagement" element={<UserManagementView />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
+                    <BingoChecker /> {/* ModalWrapper innerhalb von Router */}
                 </Router>
             </ModalProvider>
         </AuthProvider>
