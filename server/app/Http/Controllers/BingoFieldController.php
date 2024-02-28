@@ -87,8 +87,7 @@ class BingoFieldController extends Controller
                 $bingoField->field13, $bingoField->field14, $bingoField->field15, $bingoField->field16,
             ];
         })->unique()->values();
-        var_dump($gossipIds);
-        return response()->json(['message' => 'Humpalumpa'.$gossipIds], 444);
+        return response()->json(['message' => 'Humpalumpa'.$gossipIds], 404);
 
 //        $gossipStatuses = Gossip::whereIn('id', $gossipIds)->pluck('status', 'id');
 //
