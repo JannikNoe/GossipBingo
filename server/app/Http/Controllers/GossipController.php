@@ -40,23 +40,23 @@ class GossipController extends Controller
     /**
      * Löschen eines Gossip-Eintrags anhand der ID.
      */
-    public function deleteGossip($id)
-    {
-        $user = Auth::user();
-        $gossip = Gossip::find($id);
-
-        if (!$gossip) {
-            return response()->json(['message' => 'Gossip nicht gefunden'], 404);
-        }
-
-        if (!$user || !in_array($user->role, [1]) && $user->id !== $gossip->gossip_creator) {
-            return response()->json(['message' => 'Nicht autorisiert'], 403);
-        }
-
-        $gossip->delete();
-
-        return response()->json(['message' => 'Gossip gelöscht'], 200);
-    }
+//    public function deleteGossip($id)
+//    {
+//        $user = Auth::user();
+//        $gossip = Gossip::find($id);
+//
+//        if (!$gossip) {
+//            return response()->json(['message' => 'Gossip nicht gefunden'], 404);
+//        }
+//
+//        if (!$user || !in_array($user->role, [1]) && $user->id !== $gossip->gossip_creator) {
+//            return response()->json(['message' => 'Nicht autorisiert'], 403);
+//        }
+//
+//        $gossip->delete();
+//
+//        return response()->json(['message' => 'Gossip gelöscht'], 200);
+//    }
 
     /**
      * Aktualisierung des Titels eines Gossip-Eintrags anhand der ID.
