@@ -90,6 +90,7 @@ const SettingsView = () => {
                     <div
                         className="bg-white text-black rounded-3xl py-6 px-6 mt-4 cursor-pointer"
                         onClick={handleLogout}
+                        id="logoutButton"
                     >
                         <div className="flex justify-between items-center">
                             <div className="">

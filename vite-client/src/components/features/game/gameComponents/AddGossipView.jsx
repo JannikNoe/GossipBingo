@@ -102,7 +102,7 @@ const AddGossipView = () => {
                                             placeholder="Gossip Text"
                                         />
                                         <button type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" id="gossipSubmitButton">
                                                 <g id="Gruppe_69" data-name="Gruppe 69" transform="translate(-312 -229)">
                                                     <g id="Gruppe_46" data-name="Gruppe 46" transform="translate(294 208)">
                                                         <rect id="Rechteck_8" data-name="Rechteck 8" width="38" height="38" rx="19" transform="translate(18 21)" fill="#fff"/>
